@@ -1,8 +1,10 @@
+import {useNavigate} from 'react-router-dom';
 import React, {useState} from "react";
 import axios from "axios";
 
 
 const Register = () =>{
+    const navigate = useNavigate();
 
     const [data,setData] = useState({
         name:"",
@@ -10,8 +12,9 @@ const Register = () =>{
         phoneNumber:"",
         username:"",
         email:"",
-        password:""
+        password:"",
     })
+    const  [show,setShow]= React.useState(false);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -30,9 +33,16 @@ const Register = () =>{
             email: data.email,
             password: data.password
         };
-        axios.post("http://localhost:8080/api/cardiary/user/save", userData).then((response) => {
+        axios.post("http://localhost:8080/api/cardiary/user/save", userData)
+            .then((response) => {
             console.log(response.status);
-        });
+                navigate('/successfull/login');
+        })
+            .catch((error) => {
+                console.log(error)
+               setShow(true);
+            });
+
     }
     return(
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5">
@@ -89,7 +99,19 @@ const Register = () =>{
                     Sign up
                 </button>
             </form>
+            {
+                show?
+                        <Error/>:
+                    null
+            }
         </div>
-    )
+    );
 };
+const Error = () => (
+    <div id="results" className="search-results">
+        <h4 className="text-danger">
+        Check your data
+        </h4>
+    </div>
+)
 export default Register;

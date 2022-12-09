@@ -26,7 +26,3 @@ function Main() {
 
 const root = ReactDOM.createRoot(document.querySelector("#app"))
 root.render(<Main />)
-
-if (module.hot) {
-  module.hot.accept()
-}

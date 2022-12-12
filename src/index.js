@@ -8,6 +8,7 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Terms from "./components/Terms"
 import NotFound from "./components/NotFound"
+import SuccesRegister from "./components/SuccesfulRegistration";
 
 function Main() {
   return (
@@ -17,6 +18,7 @@ function Main() {
           <Route path="/" element={<HomeGuest />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/successfull/login" element={<SuccesRegister/>}/>  
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />

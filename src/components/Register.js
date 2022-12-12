@@ -33,7 +33,7 @@ const Register = () =>{
             email: data.email,
             password: data.password
         };
-        axios.post("http://localhost:8080/api/cardiary/user/save", userData)
+        axios.post("http://localhost:8080/api/user", userData)
             .then((response) => {
             console.log(response.status);
                 navigate('/successfull/login');

@@ -9,6 +9,8 @@ import About from "./components/About"
 import Terms from "./components/Terms"
 import NotFound from "./components/NotFound"
 import SuccesRegister from "./components/SuccesfulRegistration";
+import InsuranceType from "./components/insurancetype/InsuranceType";
+
 
 function Main() {
   return (
@@ -16,6 +18,7 @@ function Main() {
         <Header />
         <Routes>
           <Route path="/" element={<HomeGuest />} />
+          <Route path="/insurance_type" element={<InsuranceType />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/successfull/login" element={<SuccesRegister/>}/>  

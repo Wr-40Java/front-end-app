@@ -2,14 +2,37 @@ import React, { useState } from "react"
 import Axios from "axios"
 
 function HeaderLoggedOut(props) {
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
+
+  const [data,setData] = useState({
+    name:"",
+    surname:"",
+    phoneNumber:"",
+    username:"",
+    email:"",
+    password:"",
+  })
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setData({
+      ...data,
+      [e.target.name]: value
+    });
+  };
 
   async function handleSubmit(e) {
     e.preventDefault()
+    const userData = {
+      name: data.name,
+      surname: data.surname,
+      phoneNumber: data.phoneNumber,
+      username: data.username,
+      email: data.email,
+      password: data.password
+    };
     try {
-      const response = await Axios.get(`http://localhost:8080/api/cardiary/user/get/${username}`, { password })
-      if (response.data) {
+      const response = await Axios.get(`/user/${userData.username}`)
+      if (JSON.parse(response.data.password) == userData.password) {
         console.log(response.data)
         props.setLoggedIn(true)
       } else {
@@ -24,10 +47,10 @@ function HeaderLoggedOut(props) {
     <form onSubmit={handleSubmit} className="mb-0 pt-2 pt-md-0">
       <div className="row align-items-center">
         <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-          <input onChange={e => setUsername(e.target.value)} name="username" className="form-control form-control-sm input-dark" type="text" placeholder="Username" autoComplete="off" />
+          <input onChange={handleChange} value={data.username} name="username" className="form-control form-control-sm input-dark" type="text" placeholder="Username" autoComplete="off" />
         </div>
         <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-          <input onChange={e => setPassword(e.target.value)} name="password" className="form-control form-control-sm input-dark" type="password" placeholder="Password" />
+          <input onChange={handleChange} value={data.password} name="password" className="form-control form-control-sm input-dark" type="password" placeholder="Password" />
         </div>
         <div className="col-md-auto">
           <button className="btn btn-success btn-sm">Sign In</button>

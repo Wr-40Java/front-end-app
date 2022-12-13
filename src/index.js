@@ -10,6 +10,7 @@ import About from "./components/About"
 import Terms from "./components/Terms"
 import NotFound from "./components/NotFound"
 import SuccesRegister from "./components/SuccesfulRegistration";
+import EditProfile from "./components/EditProfile"
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
 
@@ -18,11 +19,12 @@ function Main() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<HomeGuest />} />
-          <Route path="/about-us" element={<About />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/successfull/login" element={<SuccesRegister/>}/>  
-          <Route path="/*" element={<NotFound />} />
+            <Route path="/" element={<HomeGuest />} />
+            <Route path="/about-us" element={<About />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/successfull/login" element={<SuccesRegister/>}/>
+            <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>

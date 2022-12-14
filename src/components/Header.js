@@ -17,9 +17,13 @@ function Header() {
     <header className="header-bar bg-primary mb-3">
       <div className="container d-flex flex-column flex-md-row align-items-center p-3">
         <div className="navbar-sided menu-bars">
-          <Link to='#'>
-            <FaIcons.FaBars onClick={showSidebar}/>
-          </Link>
+        <Link to='#'>
+              <div className="social-icons">
+                <span>
+                  <FaIcons.FaBars onClick={showSidebar}/>
+                </span>
+              </div>
+        </Link>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className="nav-menu-items">

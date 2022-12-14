@@ -18,7 +18,6 @@ body {
   font-size: 1.9vw;
   margin-left: 0rem;
   background-size: 0%;
-  background: #80bdff;
 }
 
 .nav-menu {
@@ -67,6 +66,17 @@ body {
 .nav-menu-items{
   width: 100%;
   padding: 10px 0px;
+}
+
+
+.social-icons span{
+  margin: 10px;
+  font-size: 25px;          
+  color: #fff;        
+}
+       
+.social-icons span:hover{
+  color:#0c495c
 }
 
 .navbar-toggle{

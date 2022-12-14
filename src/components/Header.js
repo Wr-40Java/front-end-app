@@ -6,7 +6,6 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import BurgerMenuData from './BurgerMenuData.js';
 
-
 function Header() {
   const [loggedIn, setLoggedIn] = useState()
   const [sidebar, setSidebar] = useState(false)
@@ -18,7 +17,11 @@ function Header() {
       <div className="container d-flex flex-column flex-md-row align-items-center p-3">
         <div className="navbar-sided menu-bars">
           <Link to='#'>
-            <FaIcons.FaBars onClick={showSidebar}/>
+              <div className="social-icons">
+                <span>
+                  <FaIcons.FaBars onClick={showSidebar}/>
+                </span>
+              </div>
           </Link>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

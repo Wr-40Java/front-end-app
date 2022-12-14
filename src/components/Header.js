@@ -7,8 +7,7 @@ import * as AiIcons from "react-icons/ai";
 import BurgerMenuData from './BurgerMenuData.js';
 
 
-function Header() {
-  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("appUserUsername")))
+function Header(props) {
   const [sidebar, setSidebar] = useState(false)
 
   const showSidebar = () => { setSidebar(!sidebar); } 
@@ -40,7 +39,7 @@ function Header() {
               Car Diary
             </Link>
         </h4>
-        {loggedIn ? <HeaderLoggedIn setLoggedIn={setLoggedIn} /> : <HeaderLoggedOut setLoggedIn={setLoggedIn} />}
+        {props.loggedIn ? <HeaderLoggedIn setLoggedIn={props.setLoggedIn} /> : <HeaderLoggedOut setLoggedIn={props.setLoggedIn} />}
       </div>
     </header>
   )

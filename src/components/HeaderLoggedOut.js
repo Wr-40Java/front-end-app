@@ -1,7 +1,9 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Axios from "axios"
 
 function HeaderLoggedOut(props) {
+  const navigate = useNavigate();
 
   const [data,setData] = useState({
     name:"",
@@ -32,20 +34,21 @@ function HeaderLoggedOut(props) {
     };
     try {
       const response = await Axios.get(`/user/${userData.username}`)
-      if (JSON.parse(response.data.password) == userData.password) {
-        localStorage.setItem("appUserId", response.data.id)
-        localStorage.setItem("appUserName", response.data.name)
-        localStorage.setItem("appUserSurname", response.data.surname)
-        localStorage.setItem("appUserUsername", response.data.username)
-        localStorage.setItem("appUserPassword", response.data.password)
-        localStorage.setItem("appUserEmail", response.data.email)
-        localStorage.setItem("appUserPhoneNumber", response.data.phoneNumber)
+      if (response.data.password === userData.password) {
+        localStorage.setItem("idOfUser", response.data.id)
+        localStorage.setItem("nameOfUser", response.data.name)
+        localStorage.setItem("surnameOfUser", response.data.surname)
+        localStorage.setItem("usernameOfUser", response.data.username)
+        localStorage.setItem("passwordOfUser", response.data.password)
+        localStorage.setItem("emailOfUser", response.data.email)
+        localStorage.setItem("phoneNumberOfUser", response.data.phoneNumber)
         props.setLoggedIn(true)
+        navigate("/")
       } else {
-        console.log("Incorrect username / password.")
+        console.log("Incorrect password!")
       }
     } catch (e) {
-      console.log("There was a problem.")
+      console.log("Username not found!")
     }
   }
 

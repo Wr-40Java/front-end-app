@@ -3,15 +3,23 @@ import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import CurrencyFormat from 'react-currency-format';
-import { Link } from "react-router-dom"
+import {useNavigate, Link} from 'react-router-dom';
 
 const InsuranceType = () => {
 
 const [InsTypes, setInsTypes] = useState([]);
+const [show,setShow]= React.useState(false);
 const [errorMsg, showErrorMsg]= React.useState(false);
 const [headers, setHeaders] = React.useState(['Type','Description', 
-'Costs per year', 'Covered compensation']);
+'Costs per year', 'Covered compensation', 'Delete']);
+const link = 'http://localhost:8080/api/insurance_type'
+const navigate = useNavigate();
 
+    const redirectToDelete = (type) => (
+        axios.delete(`${link}/${type}`)
+        .then((response) => {navigate('/insurance_type')})
+        .catch((error) => setShow(true))
+    )
 
     useEffect(() => {
     fetch("http://localhost:8080/api/insurancetype/list")
@@ -48,6 +56,9 @@ const [headers, setHeaders] = React.useState(['Type','Description',
                 <td>{item.description}</td>
                 <td><CurrencyFormat value={item.costsPerYear} displayType={'text'} thousandSeparator={true} suffix={' $'} /></td>
                 <td><CurrencyFormat value={item.coveredCompensation} displayType={'text'} thousandSeparator={true} suffix={' $'} /></td>
+                <td onClick={() => redirectToDelete(item.type)}>
+                    <Button variant="danger">Delete</Button>{' '}
+                </td>
             </tr>
             ))}
             </Table>

@@ -28,7 +28,7 @@ function Header() {
           <ul className="nav-menu-items">
             {BurgerMenuData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
+                <li key={index} className={item.cName} onClick={showSidebar}>
                   <Link to={item.path}>
                     {item.icon}
                     <span>{item.title}</span>

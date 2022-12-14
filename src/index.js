@@ -10,7 +10,8 @@ import Terms from "./components/Terms"
 import NotFound from "./components/NotFound"
 import SuccesRegister from "./components/SuccesfulRegistration";
 import InsuranceType from "./components/insurancetype/InsuranceType";
-
+import InsuranceTypeUpdate from "./components/insurancetype/InsuranceTypeUpdate";
+import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave";
 
 function Main() {
   return (
@@ -19,6 +20,8 @@ function Main() {
         <Routes>
           <Route path="/" element={<HomeGuest />} />
           <Route path="/insurance_type" element={<InsuranceType />} />
+          <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />
+          <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/successfull/login" element={<SuccesRegister/>}/>  

@@ -1,7 +1,9 @@
 import React, { Component, useState, useEffect} from 'react'
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import CurrencyFormat from 'react-currency-format';
+import { Link } from "react-router-dom"
 
 const InsuranceType = () => {
 
@@ -22,7 +24,17 @@ const [headers, setHeaders] = React.useState(['Type','Description',
 
     return (
         <div id='wrapper' className='CRUD'>
-            <div id='left'><p>bok</p></div>
+            <div className='name-table'>
+                <p>Available insurance types</p>
+            </div>
+            <div id='left'>
+                <Link to={'/insurance_type/save'}>
+                    <Button variant="success" className='react-bootstrap-button-success'>Add insurance type</Button>{' '} 
+                </Link>
+                <Link to={'/insurance_type/update'}>
+                    <Button variant="warning"  className='react-bootstrap-button-warning'>Update</Button>{' '}
+                </Link>
+            </div>
             <div id='right'>
             <Table striped bordered hover>
             <tr>

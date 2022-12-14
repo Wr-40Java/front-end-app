@@ -10,16 +10,26 @@ body {
 }
 #left{
   float:left;
-  width:10%;
+  width:16vw;
   overflow:hidden;
   margin-top: 5vw;
   }
 
 #right{
+  margin-top: 3vw;
   float:left;
-  width:88%;
+  width:86%;
   overflow:hidden;
   } 
+
+.name-table p{
+  position: fixed;
+  top:120px;
+  left:710px;
+  font-size: 20px;
+  font-family: "Public Sans", sans-serif;
+  font-weight: bold;
+}  
 
 .CRUD {
   padding: 0vw 5vw;
@@ -61,6 +71,7 @@ body {
   top: 1.2vw;
   left: -100%;
   transition: 850ms;
+  z-index: 1;
 }
 
 .nav-menu.active {
@@ -106,6 +117,24 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+.react-bootstrap-button-success{
+  width: 80px;
+  position: fixed;
+  top: 320px;
+  left: 80px;
+  padding: 5px 170px 10px 40px;
+  white-space: nowrap;
+  text-align: left;
+}
+.react-bootstrap-button-warning{
+  width: 100px;
+  position: fixed;
+  top: 400px;
+  left: 80px;
+  padding: 5px 130px 10px 80px;
+  text-align: center;
 }
 
 span {

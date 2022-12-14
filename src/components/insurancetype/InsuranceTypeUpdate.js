@@ -60,14 +60,6 @@ const InsuranceTypeUpdate = () => {
             {/* {fetchedTypes && <InsuranceTypeSelect insTypes={items} handleChange={this.handleChange} /> } */}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name-register" className="text-muted mb-1">
-                        <small>Type</small>
-                    </label>
-                    <input id="name-register" name="type" className="form-control"
-                           type="text" placeholder="New type" autoComplete="off"
-                           value={data.type} onChange={handleChange} />
-                </div>
-                <div className="form-group">
                     <label htmlFor="surname-register" className="text-muted mb-1">
                         <small>Description</small>
                     </label>

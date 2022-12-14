@@ -12,23 +12,29 @@ const [show,setShow]= React.useState(false);
 const [errorMsg, showErrorMsg]= React.useState(false);
 const [headers, setHeaders] = React.useState(['Type','Description', 
 'Costs per year', 'Covered compensation', 'Delete']);
-const link = 'http://localhost:8080/api/insurance_type'
+const link = 'http://localhost:8080/api/insurancetype'
 const navigate = useNavigate();
 
     const redirectToDelete = (type) => (
         axios.delete(`${link}/${type}`)
-        .then((response) => {navigate('/insurance_type')})
+        .then((response) => {fetchInsTypes()})
         .catch((error) => setShow(true))
     )
 
+    const redirectToMainPage = () => (navigate('/insurance_type'));
+
     useEffect(() => {
-    fetch("http://localhost:8080/api/insurancetype/list")
+        fetchInsTypes()
+    },[])
+
+    const fetchInsTypes = () => {
+        fetch("http://localhost:8080/api/insurancetype/list")
         .then((response) => response.json())
         .then(response => {setInsTypes(response)},
             (error) => {
                 showErrorMsg(true);
         });
-    },[])
+    }
 
     return (
         <div id='wrapper' className='CRUD'>
@@ -56,7 +62,7 @@ const navigate = useNavigate();
                 <td>{item.description}</td>
                 <td><CurrencyFormat value={item.costsPerYear} displayType={'text'} thousandSeparator={true} suffix={' $'} /></td>
                 <td><CurrencyFormat value={item.coveredCompensation} displayType={'text'} thousandSeparator={true} suffix={' $'} /></td>
-                <td onClick={() => redirectToDelete(item.type)}>
+                <td onClick={() => redirectToDelete(item.type)} onMouseDown={redirectToMainPage}>
                     <Button variant="danger">Delete</Button>{' '}
                 </td>
             </tr>

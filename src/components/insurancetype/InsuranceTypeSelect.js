@@ -4,7 +4,7 @@ const InsuranceTypeSelect = (props) => {
 
 const {insTypes, handleChange} = props;    
 
-  return (
+  return ( 
     <select 
         name='type'
         value='type'

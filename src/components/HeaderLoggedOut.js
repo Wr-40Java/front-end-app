@@ -33,7 +33,13 @@ function HeaderLoggedOut(props) {
     try {
       const response = await Axios.get(`/user/${userData.username}`)
       if (JSON.parse(response.data.password) == userData.password) {
-        console.log(response.data)
+        localStorage.setItem("appUserId", response.data.id)
+        localStorage.setItem("appUserName", response.data.name)
+        localStorage.setItem("appUserSurname", response.data.surname)
+        localStorage.setItem("appUserUsername", response.data.username)
+        localStorage.setItem("appUserPassword", response.data.password)
+        localStorage.setItem("appUserEmail", response.data.email)
+        localStorage.setItem("appUserPhoneNumber", response.data.phoneNumber)
         props.setLoggedIn(true)
       } else {
         console.log("Incorrect username / password.")

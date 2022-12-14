@@ -8,7 +8,7 @@ import BurgerMenuData from './BurgerMenuData.js';
 
 
 function Header() {
-  const [loggedIn, setLoggedIn] = useState()
+  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("appUserUsername")))
   const [sidebar, setSidebar] = useState(false)
 
   const showSidebar = () => { setSidebar(!sidebar); } 

@@ -4,7 +4,7 @@ import Page from "./Page";
 import Axios from "axios";
 
 
-const EditProfile = () =>{
+function EditProfile() {
     const navigate = useNavigate();
 
     const [data,setData] = useState({

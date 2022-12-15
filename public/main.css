@@ -5,6 +5,46 @@ body {
   font-family: "Public Sans", sans-serif;
 }
 
+#wrapper {
+  display: flex;
+}
+#left{
+  float:left;
+  width:16vw;
+  overflow:hidden;
+  margin-top: 5vw;
+  }
+
+#right{
+  margin-top: 3vw;
+  float:left;
+  width:86%;
+  overflow:hidden;
+  } 
+
+.name-table p{
+  position: fixed;
+  top:120px;
+  left:710px;
+  font-size: 20px;
+  font-family: "Public Sans", sans-serif;
+  font-weight: bold;
+}  
+
+.CRUD {
+  padding: 0vw 5vw;
+}
+
+.social-icons span{
+  margin: 10px;
+  font-size: 25px;          
+  color: #fff;        
+}
+       
+.social-icons span:hover{
+  color:#0c495c
+}
+
 .navbar-sided {
   display: flex;
   /* align-items: center; */
@@ -18,6 +58,10 @@ body {
   font-size: 1.9vw;
   margin-left: 0rem;
   background-size: 0%;
+<<<<<<< HEAD
+=======
+  /* background: #888; */
+>>>>>>> 49-insurancetype-epic-crud-for-insurance-types
 }
 
 .nav-menu {
@@ -30,6 +74,7 @@ body {
   top: 1.2vw;
   left: -100%;
   transition: 850ms;
+  z-index: 1;
 }
 
 .nav-menu.active {
@@ -66,6 +111,7 @@ body {
 .nav-menu-items{
   width: 100%;
   padding: 10px 0px;
+<<<<<<< HEAD
 }
 
 
@@ -77,6 +123,8 @@ body {
        
 .social-icons span:hover{
   color:#0c495c
+=======
+>>>>>>> 49-insurancetype-epic-crud-for-insurance-types
 }
 
 .navbar-toggle{
@@ -86,6 +134,24 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+.react-bootstrap-button-success{
+  width: 80px;
+  position: fixed;
+  top: 320px;
+  left: 80px;
+  padding: 5px 170px 10px 40px;
+  white-space: nowrap;
+  text-align: left;
+}
+.react-bootstrap-button-warning{
+  width: 100px;
+  position: fixed;
+  top: 400px;
+  left: 80px;
+  padding: 5px 130px 10px 80px;
+  text-align: center;
 }
 
 span {

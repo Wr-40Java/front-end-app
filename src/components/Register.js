@@ -13,6 +13,7 @@ const Register = () =>{
         username:"",
         email:"",
         password:"",
+        url:"http://localhost:8080/api/user"
     })
     const  [show,setShow]= React.useState(false);
 
@@ -33,10 +34,10 @@ const Register = () =>{
             email: data.email,
             password: data.password
         };
-        axios.post("http://localhost:8080/api/user", userData)
+        axios.post(data.url, userData)
             .then((response) => {
             console.log(response.status);
-                navigate('/successfull/login');
+                navigate('/successfully/login');
         })
             .catch((error) => {
                 console.log(error)

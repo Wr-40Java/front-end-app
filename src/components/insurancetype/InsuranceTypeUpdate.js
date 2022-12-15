@@ -14,7 +14,6 @@ const InsuranceTypeUpdate = () => {
     useEffect(() => {
         fetch("http://localhost:8080/api/insurancetype/list")
             .then((response) => {console.log(response); return response.json();})
-            // .then(obj => console.log(obj))
             .then(response => {setInsTypes(response); setFetchedTypes(true);},
                 (error) => {
                     showErrorMsg(true);
@@ -48,7 +47,7 @@ const InsuranceTypeUpdate = () => {
             .then((response) => {
             console.log(response.status);
             console.log(insCompData);
-             navigate('/insurancetype');
+             navigate('/insurance_type');
         })
             .catch((error) => {
                 console.log(error)

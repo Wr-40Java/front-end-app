@@ -35,6 +35,7 @@ const InsuranceTypeUpdate = () => {
             .then((response) => {
             console.log(response.status);
                 navigate('/insurance_type');
+                setData(null);
         })
             .catch((error) => {
                 console.log(error)
@@ -78,7 +79,7 @@ const InsuranceTypeUpdate = () => {
                            value={data.coveredCompensation} onChange={handleChange} />
                 </div>
                 <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
-                    Update
+                    Save
                 </button>
             </form>
             {

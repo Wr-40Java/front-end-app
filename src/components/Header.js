@@ -6,8 +6,13 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import BurgerMenuData from './BurgerMenuData.js';
 
+<<<<<<< HEAD
 function Header() {
   const [loggedIn, setLoggedIn] = useState()
+=======
+
+function Header(props) {
+>>>>>>> 90454c18b16e93bc1d27944a1a5d941b71cf2dba
   const [sidebar, setSidebar] = useState(false)
 
   const showSidebar = () => { setSidebar(!sidebar); } 
@@ -51,7 +56,7 @@ function Header() {
               Car Diary
             </Link>
         </h4>
-        {loggedIn ? <HeaderLoggedIn setLoggedIn={setLoggedIn} /> : <HeaderLoggedOut setLoggedIn={setLoggedIn} />}
+        {props.loggedIn ? <HeaderLoggedIn setLoggedIn={props.setLoggedIn} /> : <HeaderLoggedOut setLoggedIn={props.setLoggedIn} />}
       </div>
     </header>
   )

@@ -1,28 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const InsuranceTypeSelect = (props) => {
 
-const {insTypes, handleChange} = props;    
+const {insTypes, handleChange, defaultValue, setDataHook} = props;
+
+useEffect(() => {
+    setDataHook({type: insTypes[0].type, description: insTypes[0].description, costsPerYear:insTypes[0].costsPerYear,
+        coveredCompensation:insTypes[0].coveredCompensation}); {console.log(insTypes[0].type)};
+}, [])
 
   return ( 
-    <select 
+    <select  onChange={handleChange}
         name='type'
-        value='type'
-        onChange={handleChange}
+        // value={defaultValue.type}
         >
+            {console.log(defaultValue.type)}
             {insTypes.map((object, index) => (
-                <option key={index} value={object.type}>
+                <option key={index} value={object.type} onChange={handleChange}>
                     {object.type}
                 </option>
             ))}
         </select>
     )}
-         
-
-         //     <div>
-//         {props.items.map((type, index) => (<p>{type}</p>))}
-//     </div>   
-//   ) 
-// }
 
 export default InsuranceTypeSelect

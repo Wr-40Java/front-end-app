@@ -28,11 +28,11 @@ const navigate = useNavigate();
     },[])
 
     const fetchInsTypes = () => {
-        fetch("http://localhost:8080/api/insurancetype/list")
-        .then((response) => response.json())
-        .then(response => {setInsTypes(response)},
-            (error) => {
-                showErrorMsg(true);
+        axios.get("http://localhost:8080/api/insurancetype/list")
+        .then(response => setInsTypes(response.data))
+        .catch((error) => {
+            console.log(error)
+            showErrorMsg(true);
         });
     }
 
@@ -56,10 +56,10 @@ const navigate = useNavigate();
                 <th>{header}</th>
             ))}
             </tr>
-            {InsTypes.map((item) => (
+            {InsTypes.map((item) => ( 
             <tr key={item.id}>
                 <td>{item.type}</td>
-                <td>{item.description}</td>
+                <td>{item.description || ''}</td>
                 <td><CurrencyFormat value={item.costsPerYear} displayType={'text'} thousandSeparator={true} suffix={' $'} /></td>
                 <td><CurrencyFormat value={item.coveredCompensation} displayType={'text'} thousandSeparator={true} suffix={' $'} /></td>
                 <td onClick={() => redirectToDelete(item.type)} onMouseDown={redirectToMainPage}>

@@ -13,16 +13,16 @@ const InsuranceTypeUpdate = () => {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/insurancetype/list")
-            .then((response) => response.json())
-            .then(obj => console.log(obj))
-            .then(response => {setInsTypes(response); setFetchedTypes(true)},
+            .then((response) => {console.log(response); return response.json();})
+            // .then(obj => console.log(obj))
+            .then(response => {setInsTypes(response); setFetchedTypes(true);},
                 (error) => {
                     showErrorMsg(true);
-            });
+            })
         },[])
 
     const [data,setData] = useState({
-        type:"",
+        type: "",
         description:"",
         costsPerYear:0,
         coveredCompensation:0,
@@ -47,7 +47,8 @@ const InsuranceTypeUpdate = () => {
         axios.put("http://localhost:8080/api/insurancetype", insCompData)
             .then((response) => {
             console.log(response.status);
-                navigate('/insurancetype');
+            console.log(insCompData);
+             navigate('/insurancetype');
         })
             .catch((error) => {
                 console.log(error)
@@ -57,7 +58,7 @@ const InsuranceTypeUpdate = () => {
     }
     return(
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 container">
-            {/* {fetchedTypes && <InsuranceTypeSelect insTypes={items} handleChange={this.handleChange} /> } */}
+            {fetchedTypes && <InsuranceTypeSelect insTypes={InsTypes} handleChange={handleChange} defaultValue={InsTypes[0]} setDataHook={setData} /> }
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="surname-register" className="text-muted mb-1">

@@ -6,13 +6,8 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import BurgerMenuData from './BurgerMenuData.js';
 
-<<<<<<< HEAD
-function Header() {
-  const [loggedIn, setLoggedIn] = useState()
-=======
 
 function Header(props) {
->>>>>>> 90454c18b16e93bc1d27944a1a5d941b71cf2dba
   const [sidebar, setSidebar] = useState(false)
 
   const showSidebar = () => { setSidebar(!sidebar); } 
@@ -21,21 +16,11 @@ function Header(props) {
     <header className="header-bar bg-primary mb-3">
       <div className="container d-flex flex-column flex-md-row align-items-center p-3">
         <div className="navbar-sided menu-bars">
-<<<<<<< HEAD
-        <Link to='#'>
-=======
-          <Link to='#'>
->>>>>>> 49-insurancetype-epic-crud-for-insurance-types
               <div className="social-icons">
                 <span>
                   <FaIcons.FaBars onClick={showSidebar}/>
                 </span>
               </div>
-<<<<<<< HEAD
-        </Link>
-=======
-          </Link>
->>>>>>> 49-insurancetype-epic-crud-for-insurance-types
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className="nav-menu-items">

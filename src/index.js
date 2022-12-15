@@ -10,11 +10,10 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Terms from "./components/Terms"
 import NotFound from "./components/NotFound"
-import SuccesRegister from "./components/SuccesfulRegistration";
 import InsuranceType from "./components/insurancetype/InsuranceType";
 import InsuranceTypeUpdate from "./components/insurancetype/InsuranceTypeUpdate";
 import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave";
-import SuccesRegister from "./components/SuccesfulRegistration"
+import SuccesfulRegistration from "./components/SuccesfulRegistration"
 import EditProfileSuccess from "./components/EditProfileSuccess"
 import EditProfile from "./components/EditProfile"
 
@@ -35,7 +34,7 @@ function Main() {
                 <Route path="/about-us" element={<About />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/edit-profile" element={<EditProfile />} />
-                <Route path="/successfull/login" element={<SuccesRegister/>}/>
+                <Route path="/successfull/login" element={<SuccesfulRegistration/>}/>
                 <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>
                 <Route path="/*" element={<NotFound />} />
             </Routes>

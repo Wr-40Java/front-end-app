@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import CarInfo from "./CarInfo";
 import {useNavigate} from 'react-router-dom';
-
+import DeleteCar from "./DeleteCar";
 
 const url="http://localhost:8080/api/user/MarkDestroyer/cars"
 const UserCarList = (userName) => {
@@ -44,7 +43,7 @@ const UserCarList = (userName) => {
                     <th> {car.model}</th>
                     <th>
                         <button type="button" class="btn btn-info" onClick={() =>(navigate("/car-info/"+car.vinnumber))}>More info</button>
-                        < button type="button" class="btn btn-danger"> Delete car</button>
+                       <DeleteCar/>
                     </th>
                 </tr>)
         }

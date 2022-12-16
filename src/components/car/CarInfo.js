@@ -1,8 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import  {useState,useEffect} from "react";
 import axios from "axios";
-import {any, number, string} from "prop-types";
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
+
 
 
 
@@ -16,13 +15,14 @@ const CarInfo = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(url + vinNumber).then((response) => {
+        const finalUrl = url+vinNumber
+        axios.get(finalUrl).then((response) => {
             const car = response.data
             setCarData({car:car})
         });
     },[])
   return (
-      <h1>{carData.car.vinnumber}</h1>
+     <h1>{carData.car.id}</h1>
   )
 }
 export default CarInfo;

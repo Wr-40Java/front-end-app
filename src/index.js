@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Axios from "axios"
@@ -11,9 +11,8 @@ import About from "./components/About"
 import Terms from "./components/Terms"
 import NotFound from "./components/NotFound"
 import SuccesRegister from "./components/SuccesfulRegistration";
-import UserCarList from "./components/UserCarList";
-import CarInfo from "./components/CarInfo";
-import SuccesRegister from "./components/SuccesfulRegistration"
+import UserCarList from "./components/car/UserCarList";
+import CarInfo from "./components/car/CarInfo";
 import EditProfileSuccess from "./components/EditProfileSuccess"
 import EditProfile from "./components/EditProfile"
 

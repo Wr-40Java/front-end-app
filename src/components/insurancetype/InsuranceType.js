@@ -45,9 +45,11 @@ const navigate = useNavigate();
                 <Link to={'/insurance_type/save'}>
                     <Button variant="success" className='react-bootstrap-button-success'>Add insurance type</Button>{' '} 
                 </Link>
+                { InsTypes.length > 0 &&
                 <Link to={'/insurance_type/update'}>
                     <Button variant="warning"  className='react-bootstrap-button-warning'>Update</Button>{' '}
                 </Link>
+                }
             </div>
             <div id='right'>
             <Table striped bordered hover>

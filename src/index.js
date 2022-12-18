@@ -16,6 +16,7 @@ import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave";
 import SuccesfulRegistration from "./components/SuccesfulRegistration"
 import EditProfileSuccess from "./components/EditProfileSuccess"
 import EditProfile from "./components/EditProfile"
+import ManageTaxType from "./components/taxtype/ManageTaxType"
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
 
@@ -36,6 +37,7 @@ function Main() {
                 <Route path="/edit-profile" element={<EditProfile />} />
                 <Route path="/successfull/login" element={<SuccesfulRegistration/>}/>
                 <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>
+                <Route path="/tax_type" element={<ManageTaxType/>}/>
                 <Route path="/*" element={<NotFound />} />
             </Routes>
             <Footer />

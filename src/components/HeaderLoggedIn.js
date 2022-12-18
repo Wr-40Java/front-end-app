@@ -6,13 +6,13 @@ function HeaderLoggedIn(props) {
 
     function handleLogOut() {
         props.setLoggedIn(false)
-        localStorage.removeItem("appUserId")
-        localStorage.removeItem("appUserName")
-        localStorage.removeItem("appUserSurname")
-        localStorage.removeItem("appUserUsername")
-        localStorage.removeItem("appUserPassword")
-        localStorage.removeItem("appUserEmail")
-        localStorage.removeItem("appUserPhoneNumber")
+        localStorage.removeItem("idOfUser")
+        localStorage.removeItem("nameOfUser")
+        localStorage.removeItem("surnameOfUser")
+        localStorage.removeItem("usernameOfUser")
+        localStorage.removeItem("passwordOfUser")
+        localStorage.removeItem("emailOfUser")
+        localStorage.removeItem("phoneNumberOfUser")
         navigate("/")
     }
 

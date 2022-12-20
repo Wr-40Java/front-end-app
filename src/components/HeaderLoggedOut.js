@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Axios from "axios"
+import base64 from 'react-native-base64'
+import {AuthContext} from '../index'
 
 function HeaderLoggedOut(props) {
   const navigate = useNavigate();
+  const {setLoggedIn, setUsername} = useContext(AuthContext)
 
   const [data,setData] = useState({
     name:"",
@@ -25,24 +28,23 @@ function HeaderLoggedOut(props) {
   async function handleSubmit(e) {
     e.preventDefault()
     const userData = {
-      name: data.name,
-      surname: data.surname,
-      phoneNumber: data.phoneNumber,
       username: data.username,
-      email: data.email,
       password: data.password
     };
+    var credentials = `${userData.username}:${userData.password}`;
+    var encodedCredentials = base64.encode(credentials);
+    var basicAuthCred = `Basic ${encodedCredentials}`;
+    console.log(`Basic ${encodedCredentials}`);
+
     try {
-      const response = await Axios.get(`/user/${userData.username}`)
-      if (response.data.password === userData.password) {
-        localStorage.setItem("idOfUser", response.data.id)
-        localStorage.setItem("nameOfUser", response.data.name)
-        localStorage.setItem("surnameOfUser", response.data.surname)
-        localStorage.setItem("usernameOfUser", response.data.username)
-        localStorage.setItem("passwordOfUser", response.data.password)
-        localStorage.setItem("emailOfUser", response.data.email)
-        localStorage.setItem("phoneNumberOfUser", response.data.phoneNumber)
-        props.setLoggedIn(true)
+      const response = await Axios.get('/insurancetype/list', {headers: {'Authorization': `Basic ${encodedCredentials}`,'Content-Type': 'application/json;charset=UTF-8',"Access-Control-Allow-Origin": "http://localhost:3000"}})
+      console.log(response);
+      if (response.status === 200) {
+        localStorage.setItem("username", userData.username)
+        localStorage.setItem("credentials", basicAuthCred)
+        setLoggedIn(true)
+        setUsername(userData.username)
+
         navigate("/")
       } else {
         console.log("Incorrect password!")

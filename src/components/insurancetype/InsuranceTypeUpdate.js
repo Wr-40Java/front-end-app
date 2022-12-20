@@ -8,8 +8,6 @@ import { BasicFormValidation } from './BasicFormValidation';
 import CustomInput from './CustomInput';
 import CustomSelect from './CustomSelect';
 
-
-
 const InsuranceTypeUpdate = () => {
 
     const navigate = useNavigate();

@@ -1,9 +1,12 @@
-import React, { Component, useState, useEffect} from 'react'
+import React, { Component, useState, useEffect,useContext} from 'react'
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import CurrencyFormat from 'react-currency-format';
 import {useNavigate, Link} from 'react-router-dom';
+import common_axios from '../Axios_default/Axios_default';
+import {AuthContext} from '../../index'
+
 
 const InsuranceType = () => {
 
@@ -14,6 +17,8 @@ const [headers, setHeaders] = React.useState(['Type','Description',
 'Costs per year', 'Covered compensation', 'Delete']);
 const link = 'http://localhost:8080/api/insurancetype'
 const navigate = useNavigate();
+const context = useContext(AuthContext)
+console.log(context);
 
     const redirectToDelete = (type) => (
         axios.delete(`${link}/${type}`)
@@ -28,8 +33,8 @@ const navigate = useNavigate();
     },[])
 
     const fetchInsTypes = () => {
-        axios.get("http://localhost:8080/api/insurancetype/list")
-        .then(response => setInsTypes(response.data))
+        common_axios.get("insurancetype/list")
+        .then(response => {setInsTypes(response.data); console.log(response);})
         .catch((error) => {
             console.log(error)
             showErrorMsg(true);
@@ -39,7 +44,7 @@ const navigate = useNavigate();
     return (
         <div id='wrapper' className='CRUD'>
             <div className='name-table'>
-                <p>Available insurance types</p>
+                <p>Available insurance types for {context.username}</p>
             </div>
             <div id='left'>
                 <Link to={'/insurance_type/save'}>

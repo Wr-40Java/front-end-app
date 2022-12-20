@@ -16,7 +16,8 @@ import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave"
 import SuccesfulRegistration from "./components/SuccesfulRegistration"
 import EditProfileSuccess from "./components/EditProfileSuccess"
 import EditProfile from "./components/EditProfile"
-import MaintenanceHistory from "./components/maintenancehistory/MaintenanceHistory"
+import MaintenanceEvent from "./components/maintenanceevent/MaintenanceEvent"
+import AddEvent from "./components/maintenanceevent/AddEvent"
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
 
@@ -36,7 +37,8 @@ function Main() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/successfull/login" element={<SuccesfulRegistration />} />
         <Route path="/edit-profile-success" element={<EditProfileSuccess />} />
-        <Route path="/history" element={<MaintenanceHistory />} />
+        <Route path="/event" element={<MaintenanceEvent />} />
+        <Route path="/event/save" element={<AddEvent />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       <Footer />

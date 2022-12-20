@@ -1,15 +1,15 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Axios from "axios"
+import axios from "axios"
 
 function SaveTaxType() {
     const navigate = useNavigate();
     const [show,setShow]= React.useState(false);
 
     const [data,setData] = useState({
-        type:"",
+        name:"",
         institutionToPayFor:"",
-        institutionToPayForPhoneNumber:0,
+        institutionToPayForPhoneNumber:"",
         description:""
     })
 
@@ -21,18 +21,23 @@ function SaveTaxType() {
         });
     };
 
-    async function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault()
         const taxTypeData = {
-            type: data.type,
+            name: data.name,
             institutionToPayFor: data.institutionToPayFor,
             institutionToPayForPhoneNumber: data.institutionToPayForPhoneNumber,
             description: data.description
         };
-        Axios.post("/taxtype", taxTypeData)
+        axios.post("/taxtype", taxTypeData)
             .then((response) => {
                 console.log(response.status);
-                setData(null);
+                setData({
+                    ...data,
+                    name:"",
+                    institutionToPayFor:"",
+                    institutionToPayForPhoneNumber:0,
+                    description:""});
             })
             .catch((error) => {
                 console.log(error)
@@ -45,45 +50,41 @@ function SaveTaxType() {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name-register" className="text-muted mb-1">
-                        <small>Type</small>
+                        <small>Type:</small>
                     </label>
-                    <input id="name-register" name="type" className="form-control"
-                           type="text" placeholder="New type" autoComplete="off"
-                           value={data.type} onChange={handleChange} />
+                    <input id="name-register" name="name" className="form-control"
+                           type="text" placeholder="New name" autoComplete="off"
+                           value={data.name} onChange={handleChange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="surname-register" className="text-muted mb-1">
-                        <small>Description</small>
+                    <label htmlFor="email-register" className="text-muted mb-1">
+                        <small>Institution to pay for:</small>
                     </label>
-                    <input id="surname-register" name="description" className="form-control"
-                           type="text" placeholder="New description" autoComplete="off"
-                           value={data.description} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="phone-number-register" className="text-muted mb-1">
-                        <small>CostsPerYear</small>
-                    </label>
-                    <input id="phone-number-register" name="costsPerYear" className="form-control"
-                           type="text" placeholder="Your phone number" autoComplete="off"
+                    <input id="email-register" name="institutionToPayFor" className="form-control"
+                           type="text" placeholder="Fill institution" autoComplete="off"
                            value={data.institutionToPayFor} onChange={handleChange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="username-register" className="text-muted mb-1">
-                        <small>Covered compensation</small>
+                    <label htmlFor="phone-number-register" className="text-muted mb-1">
+                        <small>Phone Number of Institution:</small>
                     </label>
-                    <input id="username-register" name="coveredCompensation" className="form-control"
-                           type="text" placeholder="Pick a username" autoComplete="off"
+                    <input id="phone-number-register" name="institutionToPayForPhoneNumber" className="form-control"
+                           type="text" placeholder="Fill phone number" autoComplete="off"
                            value={data.institutionToPayForPhoneNumber} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="surname-register" className="text-muted mb-1">
+                        <small>Description:</small>
+                    </label>
+                    <input id="surname-register" name="description" className="form-control"
+                           type="text" placeholder="Small description" autoComplete="off"
+                           value={data.description} onChange={handleChange} />
                 </div>
                 <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                     Save
                 </button>
             </form>
-            {
-                show?
-                    <Error/>:
-                    null
-            }
+            { show ? <Error/> : null }
         </div>
     )
 }

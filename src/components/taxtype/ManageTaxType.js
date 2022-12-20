@@ -1,18 +1,25 @@
 import React, {useEffect, useState} from "react"
 import Page from "../Page"
-import { Link } from "react-router-dom"
 import Select from 'react-select'
 import axios from "axios";
 import SaveTaxType from "./SaveTaxType";
+import EditTaxType from "./EditTaxType";
+import Button from "react-bootstrap/Button";
+import {useNavigate} from 'react-router-dom';
 
 function ManageTaxType() {
+    const navigate = useNavigate()
     const [userOptions, setUserOptions] = useState([])
     const [selected, setSelected] = useState([])
+    const [show,setShow]= React.useState(false);
+    const [edit,setEdit]= React.useState(false);
+
     const [showedTaxType, setShowedTaxType] = useState({
-        name:"No Data",
-        institutionToPayFor:"No Data",
-        institutionToPayForPhoneNumber:"No Data",
-        description:"No Data"
+        id:"",
+        name:"?",
+        institutionToPayFor:"?",
+        institutionToPayForPhoneNumber:"?",
+        description:"?"
     })
 
     const handleChange = (e) => {
@@ -20,6 +27,7 @@ function ManageTaxType() {
         axios.get(`/taxtype/${e.value}`).then((response) => {
             setShowedTaxType({
                 ...showedTaxType,
+                id: response.data.id,
                 name: response.data.name,
                 institutionToPayFor: response.data.institutionToPayFor,
                 institutionToPayForPhoneNumber: response.data.institutionToPayForPhoneNumber,
@@ -36,12 +44,31 @@ function ManageTaxType() {
                 result.map((taxType) => {
                     return arr.push({value: taxType.id, label: taxType.name});
                 });
-                console.log(arr)
                 setUserOptions(arr)
-            });
+            })
+                .catch((error) => {
+                    console.log(error)
+                });
         };
-        getData();
+        getData()
     }, []);
+
+    function handleDelete(id) {
+        setEdit(false)
+        if (id !== "") {
+            axios.delete(`/taxtype/${id}`)
+                .catch((error) => setShow(true))
+            setShowedTaxType({
+                ...showedTaxType,
+                id: "",
+                name: "?",
+                institutionToPayFor: "?",
+                institutionToPayForPhoneNumber: "?",
+                description: "?"
+            })
+            setSelected(undefined)
+        }
+    }
 
     return (
         <Page title="Manage Tax Type" wide={true}>
@@ -62,11 +89,23 @@ function ManageTaxType() {
                         <p>Phone number of institution: <strong>{showedTaxType.institutionToPayForPhoneNumber}</strong>.</p>
                         <p>Description: <strong>{showedTaxType.description}</strong>.</p>
                     </div>
+                    <div className="row row-cols-2">
+                        <Button variant="warning" onClick={() => setEdit(true)}>Edit</Button>
+                        <Button variant="danger" onClick={handleDelete} onMouseDown={() => (navigate("/tax_type"))}>Delete</Button>
+                    </div>
                 </div>
-                <SaveTaxType/>
+                { edit ? <EditTaxType showedTaxType={showedTaxType} setShowedTaxType={setShowedTaxType} setEdit={setEdit}/> : <SaveTaxType/>}
+                { show ? <Error/> : null }
             </div>
         </Page>
     )
 }
 
+const Error = () => (
+    <div id="results" className="search-results">
+        <h4 className="text-danger">
+            Check your data
+        </h4>
+    </div>
+)
 export default ManageTaxType

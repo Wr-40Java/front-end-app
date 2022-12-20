@@ -1,15 +1,16 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import Button from "react-bootstrap/Button";
 
-function SaveTaxType() {
+function EditTaxType(props) {
     const [show,setShow]= React.useState(false);
 
     const [data,setData] = useState({
-        name:"",
-        institutionToPayFor:"",
-        institutionToPayForPhoneNumber:"",
-        description:""
+        id: props.showedTaxType.id,
+        name: props.showedTaxType.name,
+        institutionToPayFor: props.showedTaxType.institutionToPayFor,
+        institutionToPayForPhoneNumber: props.showedTaxType.institutionToPayForPhoneNumber,
+        description: props.showedTaxType.description
     })
 
     const handleChange = (e) => {
@@ -23,38 +24,27 @@ function SaveTaxType() {
     const handleSubmit = (e) => {
         e.preventDefault()
         const taxTypeData = {
+            id: data.id,
             name: data.name,
             institutionToPayFor: data.institutionToPayFor,
             institutionToPayForPhoneNumber: data.institutionToPayForPhoneNumber,
             description: data.description
         };
-        axios.post("/taxtype", taxTypeData)
+        console.log(taxTypeData)
+        axios.put("/taxtype", taxTypeData)
             .then((response) => {
                 console.log(response.status);
-                setData({
-                    ...data,
-                    name:"",
-                    institutionToPayFor:"",
-                    institutionToPayForPhoneNumber:0,
-                    description:""});
             })
             .catch((error) => {
                 console.log(error)
                 setShow(true);
             });
+        props.setEdit(false)
     }
 
     return (
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 container">
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name-register" className="text-muted mb-1">
-                        <small>Type:</small>
-                    </label>
-                    <input id="name-register" name="name" className="form-control"
-                           type="text" placeholder="New name" autoComplete="off"
-                           value={data.name} onChange={handleChange} />
-                </div>
                 <div className="form-group">
                     <label htmlFor="email-register" className="text-muted mb-1">
                         <small>Institution to pay for:</small>
@@ -80,8 +70,11 @@ function SaveTaxType() {
                            value={data.description} onChange={handleChange} />
                 </div>
                 <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
-                    Save
+                    Update Tax Type
                 </button>
+                <Button onClick={() => props.setEdit(false)} variant="warning" className="py-3 mt-4 btn btn-lg btn-success btn-block">
+                    Abort Editing
+                </Button>
             </form>
             { show ? <Error/> : null }
         </div>
@@ -96,4 +89,4 @@ const Error = () => (
     </div>
 )
 
-export default SaveTaxType
+export default EditTaxType

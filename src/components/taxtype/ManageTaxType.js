@@ -7,24 +7,36 @@ import SaveTaxType from "./SaveTaxType";
 
 function ManageTaxType() {
     const [userOptions, setUserOptions] = useState([])
-    const [selects, setSelects] = useState(userOptions.value)
+    const [selected, setSelected] = useState([])
+    const [showedTaxType, setShowedTaxType] = useState({
+        name:"No Data",
+        institutionToPayFor:"No Data",
+        institutionToPayForPhoneNumber:"No Data",
+        description:"No Data"
+    })
 
     const handleChange = (e) => {
-        setSelects(e.value);
+        setSelected(e)
+        axios.get(`/taxtype/${e.value}`).then((response) => {
+            setShowedTaxType({
+                ...showedTaxType,
+                name: response.data.name,
+                institutionToPayFor: response.data.institutionToPayFor,
+                institutionToPayForPhoneNumber: response.data.institutionToPayForPhoneNumber,
+                description: response.data.description
+            })
+        })
     };
 
     useEffect(() => {
         const getData = async () => {
             const arr = [];
-            const obj = {};
-            await axios.get("/taxtype/list").then((response) => {
+            axios.get("/taxtype/list").then((response) => {
                 let result = response.data;
                 result.map((taxType) => {
-                    obj[taxType.name] = taxType;
-                    return arr.push({value: taxType, label: taxType.name});
+                    return arr.push({value: taxType.id, label: taxType.name});
                 });
                 console.log(arr)
-                console.log(obj)
                 setUserOptions(arr)
             });
         };
@@ -39,11 +51,16 @@ function ManageTaxType() {
                     <p>The available Tax Types are shown here. <strong>Select</strong> the required one from <strong>the list</strong> or <strong>create</strong> a new one.</p>
                     <Select
                         placeholder= "Select a Tax Type"
-                        isClearable options={userOptions}
+                        options={userOptions}
+                        value={selected}
                         onChange={handleChange}
                     />
                     <div className="col-lg-7 py-3 py-md-5">
-                        {selects}
+                        <p className="lead">Data of selected Tax Type:</p>
+                        <p>Name: <strong>{showedTaxType.name}</strong>.</p>
+                        <p>Institution: <strong>{showedTaxType.institutionToPayFor}</strong>.</p>
+                        <p>Phone number of institution: <strong>{showedTaxType.institutionToPayForPhoneNumber}</strong>.</p>
+                        <p>Description: <strong>{showedTaxType.description}</strong>.</p>
                     </div>
                 </div>
                 <SaveTaxType/>

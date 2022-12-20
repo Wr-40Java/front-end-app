@@ -21,7 +21,7 @@ const context = useContext(AuthContext)
 console.log(context);
 
     const redirectToDelete = (type) => (
-        axios.delete(`${link}/${type}`)
+        common_axios.delete(`/insurancetype/${type}`)
         .then((response) => {fetchInsTypes()})
         .catch((error) => setShow(true))
     )

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Axios from "axios"
 import base64 from 'react-native-base64'
 import {AuthContext} from '../index'
+import common_axios from "./Axios_default/Axios_default"
 
 function HeaderLoggedOut(props) {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function HeaderLoggedOut(props) {
     console.log(`Basic ${encodedCredentials}`);
 
     try {
-      const response = await Axios.get('/insurancetype/list', {headers: {'Authorization': `Basic ${encodedCredentials}`,'Content-Type': 'application/json;charset=UTF-8',"Access-Control-Allow-Origin": "http://localhost:3000"}})
+      const response = await common_axios.get('insurancetype/list')
       console.log(response);
       if (response.status === 200) {
         localStorage.setItem("username", userData.username)

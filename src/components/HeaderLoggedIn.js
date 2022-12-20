@@ -13,6 +13,7 @@ function HeaderLoggedIn(props) {
         localStorage.removeItem("appUserPassword")
         localStorage.removeItem("appUserEmail")
         localStorage.removeItem("appUserPhoneNumber")
+        localStorage.removeItem("usernameOfUser")
         navigate("/")
     }
 

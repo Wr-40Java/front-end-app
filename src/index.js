@@ -15,12 +15,13 @@ import UserCarList from "./components/car/UserCarList";
 import CarInfo from "./components/car/CarInfo";
 import EditProfileSuccess from "./components/EditProfileSuccess"
 import EditProfile from "./components/EditProfile"
+import AddCar from "./components/car/AddCar";
+import EditCar from "./components/car/EditCar";
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
 
 function Main() {
     const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("usernameOfUser")))
-
     return (
         <BrowserRouter>
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
@@ -32,8 +33,10 @@ function Main() {
                 <Route path="/successfull/login" element={<SuccesRegister/>}/>
                 <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>
                 <Route path="/*" element={<NotFound />} />
-                <Route path="/cars"   element={<UserCarList/>} />
+                <Route path="/addCar/:userName" element={<AddCar/>}/>
+                <Route path="/cars"   element={<UserCarList userName={localStorage.getItem("usernameOfUser")}/>} />
                 <Route path="/car-info/:vinNumber" element={<CarInfo/>} />
+                <Route path="/car-edit/:vinNumber" element={<EditCar/>} />
             </Routes>
             <Footer />
         </BrowserRouter>

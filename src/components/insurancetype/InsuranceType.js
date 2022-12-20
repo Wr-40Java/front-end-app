@@ -34,7 +34,7 @@ console.log(context);
 
     const fetchInsTypes = () => {
         common_axios.get("insurancetype/list")
-        .then(response => {setInsTypes(response.data); console.log(response);})
+        .then(response => {setInsTypes(response.data)})
         .catch((error) => {
             console.log(error)
             showErrorMsg(true);
@@ -95,3 +95,5 @@ const Error = () => (
     </div>
 )
 export default InsuranceType
+
+

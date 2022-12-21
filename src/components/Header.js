@@ -1,14 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import HeaderLoggedOut from "./HeaderLoggedOut"
 import HeaderLoggedIn from "./HeaderLoggedIn"
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import BurgerMenuData from './BurgerMenuData.js';
-
+import {AuthContext} from '../index'
 
 function Header(props) {
   const [sidebar, setSidebar] = useState(false)
+  const {loggedIn} = useContext(AuthContext)
 
   const showSidebar = () => { setSidebar(!sidebar); } 
 
@@ -41,7 +42,7 @@ function Header(props) {
               Car Diary
             </Link>
         </h4>
-        {props.loggedIn ? <HeaderLoggedIn setLoggedIn={props.setLoggedIn} /> : <HeaderLoggedOut setLoggedIn={props.setLoggedIn} />}
+        { loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
       </div>
     </header>
   )

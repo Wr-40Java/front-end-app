@@ -1,22 +1,49 @@
 import {useNavigate} from 'react-router-dom';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Page from "./Page";
-import Axios from "axios";
+import common_axios from './Axios_default/Axios_default'
 
 
 function EditProfile() {
     const navigate = useNavigate();
+    const  [show,setShow]= React.useState(false);
 
     const [data,setData] = useState({
         name: "",
-        surname:"",
-        phoneNumber:"",
-        username:`${localStorage.getItem("usernameOfUser")}`,
-        email:"",
-        password:""
+        surname: "",
+        phoneNumber: "",
+        username: "",
+        email: "",
+        password: ""
     })
 
-    const  [show,setShow]= React.useState(false);
+    const [userInfo, setUserInfo] = useState({
+        name: "?",
+        surname: "?",
+        phoneNumber: "?",
+        email: "?"
+    })
+
+    useEffect( () => {
+        common_axios.get(`/user/${localStorage.getItem('username')}`)
+            .then((response) => {
+                setUserInfo({
+                    ...userInfo,
+                    name: response.data.name,
+                    surname: response.data.surname,
+                    phoneNumber: response.data.phoneNumber,
+                    email: response.data.email,
+                })
+                setData({
+                    ...data,
+                    username: response.data.username,
+                    password: response.data.password
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }, []);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -26,7 +53,7 @@ function EditProfile() {
         });
     };
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         const userData = {
             name: data.name,
@@ -36,14 +63,9 @@ function EditProfile() {
             email: data.email,
             password: data.password
         };
-        await Axios.put("/user", userData)
+        common_axios.put("/user", userData)
             .then((response) => {
                 console.log(response.status);
-                localStorage.setItem("nameOfUser", response.data.name)
-                localStorage.setItem("surnameOfUser", response.data.surname)
-                localStorage.setItem("passwordOfUser", response.data.password)
-                localStorage.setItem("emailOfUser", response.data.email)
-                localStorage.setItem("phoneNumberOfUser", response.data.phoneNumber)
                 navigate('/edit-profile-success');
             })
             .catch((error) => {
@@ -58,11 +80,10 @@ function EditProfile() {
                 <div className="col-lg-7 py-3 py-md-5">
                     <h1>Here you can edit your profile!</h1>
                     <p className="lead">Your profile details are shown here:</p>
-                    <p>Name: <strong>{localStorage.getItem("nameOfUser")}</strong>.</p>
-                    <p>Surname: <strong>{localStorage.getItem("surnameOfUser")}</strong>.</p>
-                    <p>Phone number: <strong>{localStorage.getItem("phoneNumberOfUser")}</strong>.</p>
-                    <p>Email: <strong>{localStorage.getItem("emailOfUser")}</strong>.</p>
-                    <p>Password: <strong>{localStorage.getItem("passwordOfUser")}</strong>.</p>
+                    <p>Name: <strong>{userInfo.name}</strong>.</p>
+                    <p>Surname: <strong>{userInfo.surname}</strong>.</p>
+                    <p>Phone number: <strong>{userInfo.phoneNumber}</strong>.</p>
+                    <p>Email: <strong>{userInfo.email}</strong>.</p>
                 </div>
                 <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5">
                     <form onSubmit={handleSubmit}>
@@ -98,14 +119,6 @@ function EditProfile() {
                                    type="text" placeholder="you@example.com" autoComplete="off"
                                    value={data.email} onChange={handleChange} />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="password-register" className="text-muted mb-1">
-                                <small>Password</small>
-                            </label>
-                            <input id="password-register" name="password" className="form-control"
-                                   type="password" placeholder="Create a new password"
-                                   value={data.password} onChange={handleChange}/>
-                        </div>
                         <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                             Confirm Edit
                         </button>
@@ -115,7 +128,7 @@ function EditProfile() {
             </div>
         </Page>
     );
-};
+}
 const Error = () => (
     <div id="results" className="search-results">
         <h4 className="text-danger">

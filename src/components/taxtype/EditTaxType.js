@@ -40,6 +40,8 @@ function EditTaxType(props) {
                 setShow(true);
             });
         props.setEdit(false)
+        props.setPick(false)
+        props.setSelected(null)
     }
 
     return (

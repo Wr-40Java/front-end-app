@@ -38,20 +38,17 @@ function ManageTaxType() {
     };
 
     useEffect(() => {
-        const getData = async () => {
-            const arr = [];
-            common_axios.get("/taxtype/list").then((response) => {
-                response.data.map((taxType) => {
-                    return arr.push({value: taxType.id, label: taxType.name});
-                });
-                setUserOptions(arr)
-            })
-                .catch((error) => {
-                    console.log(error)
-                });
-        };
-        getData().then()
-    }, []);
+        const arr = [];
+        common_axios.get("/taxtype/list").then((response) => {
+            response.data.map((taxType) => {
+                return arr.push({value: taxType.id, label: taxType.name});
+            });
+            setUserOptions(arr)
+        })
+            .catch((error) => {
+                console.log(error)
+            });
+    },[]);
 
     function handleDelete() {
         setEdit(false)
@@ -85,7 +82,12 @@ function ManageTaxType() {
                     />
                     { pick ? <InfoTaxType showedTaxType={showedTaxType} setEdit={setEdit} handleDelete={handleDelete}/> : undefined }
                 </div>
-                { edit ? <EditTaxType showedTaxType={showedTaxType} setShowedTaxType={setShowedTaxType} setEdit={setEdit}/> : <SaveTaxType/>}
+                { edit ? <EditTaxType
+                    showedTaxType={showedTaxType}
+                    setShowedTaxType={setShowedTaxType}
+                    setEdit={setEdit}
+                    setPick={setPick}
+                    setSelected={setSelected}/> : <SaveTaxType/>}
                 { show ? <Error/> : null }
             </div>
         </Page>

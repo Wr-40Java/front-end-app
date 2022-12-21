@@ -23,6 +23,7 @@ function ManageTaxType() {
 
     const handleChange = (e) => {
         setSelected(e)
+        setEdit(false)
         setPick(true)
         common_axios.get(`/taxtype/${e.value}`).then((response) => {
             setShowedTaxType({

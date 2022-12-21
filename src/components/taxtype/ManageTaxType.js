@@ -7,7 +7,7 @@ import InfoTaxType from "./InfoTaxType";
 import common_axios from '../Axios_default/Axios_default'
 
 function ManageTaxType() {
-    const [userOptions, setUserOptions] = useState([])
+    const [taxTypeOptions, setTaxTypeOptions] = useState([])
     const [selected, setSelected] = useState([])
     const [show,setShow]= React.useState(false);
     const [edit,setEdit]= React.useState(false);
@@ -43,7 +43,7 @@ function ManageTaxType() {
             response.data.map((taxType) => {
                 return arr.push({value: taxType.id, label: taxType.name});
             });
-            setUserOptions(arr)
+            setTaxTypeOptions(arr)
         })
             .catch((error) => {
                 console.log(error)
@@ -76,7 +76,7 @@ function ManageTaxType() {
                     <p>The available Tax Types are shown here. <strong>Select</strong> the required one from <strong>the list</strong> or <strong>create</strong> a new one.</p>
                     <Select
                         placeholder= "Select a Tax Type"
-                        options={userOptions}
+                        options={taxTypeOptions}
                         value={selected}
                         onChange={handleChange}
                     />

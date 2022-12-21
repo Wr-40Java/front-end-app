@@ -16,6 +16,7 @@ import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave";
 import SuccesfulRegistration from "./components/SuccesfulRegistration"
 import EditProfileSuccess from "./components/EditProfileSuccess"
 import EditProfile from "./components/EditProfile"
+import TechnicalServiceSave from "./components/TechnicalServiceSave"
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
 
@@ -27,6 +28,7 @@ function Main() {
         <BrowserRouter>
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
             <Routes>
+                <Route path="/technical_service" element={<TechnicalServiceSave/>} />
                 <Route path="/" element={loggedIn ? <Home /> : <HomeGuest />} />
                 <Route path="/insurance_type" element={<InsuranceType />} />
                 <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />

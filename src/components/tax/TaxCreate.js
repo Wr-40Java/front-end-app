@@ -37,42 +37,19 @@ function TaxCreate() {
 
     return (
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 container">
-            <h4>Here you can create new Tax !</h4>
+            <h4>Here you can add new Tax.</h4>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name-register" className="text-muted mb-1">
-                        <small>Type:</small>
+                        <small>Cost Of Transaction:</small>
                     </label>
                     <input id="name-register" name="name" className="form-control"
-                           type="text" placeholder="New name" autoComplete="off"
+                           type="text" placeholder="Enter cost here" autoComplete="off"
                            value={data.name} onChange={handleChange}/>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="email-register" className="text-muted mb-1">
-                        <small>Institution to pay for:</small>
-                    </label>
-                    <input id="email-register" name="institutionToPayFor" className="form-control"
-                           type="text" placeholder="Fill institution" autoComplete="off"
-                           value={data.institutionToPayFor} onChange={handleChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="phone-number-register" className="text-muted mb-1">
-                        <small>Phone Number of Institution:</small>
-                    </label>
-                    <input id="phone-number-register" name="institutionToPayForPhoneNumber" className="form-control"
-                           type="text" placeholder="Fill phone number" autoComplete="off"
-                           value={data.institutionToPayForPhoneNumber} onChange={handleChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="surname-register" className="text-muted mb-1">
-                        <small>Description:</small>
-                    </label>
-                    <input id="surname-register" name="description" className="form-control"
-                           type="text" placeholder="Small description" autoComplete="off"
-                           value={data.description} onChange={handleChange}/>
-                </div>
+
                 <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
-                    Save
+                    Add
                 </button>
             </form>
             {show ? <Error/> : null}

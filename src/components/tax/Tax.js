@@ -13,8 +13,7 @@ function Tax() {
     const [pick,setPick]= React.useState(false);
 
     const [showedTax, setShowedTax] = useState({
-        id:"",
-        costOfTransaction:0
+        costOfTransaction:""
     })
 
     const handleChange = (e) => {
@@ -24,7 +23,6 @@ function Tax() {
         common_axios.get(`/tax/${e.value}`).then((response) => {
             setShowedTax({
                 ...showedTax,
-                id: response.data.id,
                 costOfTransaction: response.data.costOfTransaction
             })
         })
@@ -55,10 +53,7 @@ function Tax() {
             setShowedTax({
                 ...showedTax,
                 id: "",
-                name: "?",
-                institutionToPayFor: "?",
-                institutionToPayForPhoneNumber: "?",
-                description: "?"
+                costOfTransaction: "?",
             })
             setSelected(null)
         }
@@ -92,4 +87,4 @@ const Error = () => (
         </h4>
     </div>
 )
-export default ManageTaxType
+export default Tax

@@ -19,6 +19,7 @@ import EditProfile from "./components/EditProfile"
 import ManageTaxType from "./components/taxtype/ManageTaxType"
 import AuthProvider from "./components/context/AuthProvider"
 import { ProtectedRoute } from "./components/ProtectedRoute"
+import Tax from "./components/tax/Tax";
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
 
@@ -41,6 +42,7 @@ function Main() {
                     <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />
                     <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
                     <Route path="/tax_type" element={<ManageTaxType />} />
+                    <Route path="/tax" element={<Tax />} />
                     <Route path="/about-us" element={<About />} />
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/edit-profile" element={<EditProfile />} />

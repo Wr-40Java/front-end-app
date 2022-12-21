@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import common_axios from '../Axios_default/Axios_default'
 
 function SaveTaxType() {
     const [show,setShow]= React.useState(false);
@@ -28,14 +27,14 @@ function SaveTaxType() {
             institutionToPayForPhoneNumber: data.institutionToPayForPhoneNumber,
             description: data.description
         };
-        axios.post("/taxtype", taxTypeData)
+        common_axios.post("/taxtype", taxTypeData)
             .then((response) => {
                 console.log(response.status);
                 setData({
                     ...data,
                     name:"",
                     institutionToPayFor:"",
-                    institutionToPayForPhoneNumber:0,
+                    institutionToPayForPhoneNumber:"",
                     description:""});
             })
             .catch((error) => {
@@ -46,6 +45,7 @@ function SaveTaxType() {
 
     return (
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 container">
+            <h4>Here you can create new Tax Type!</h4>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name-register" className="text-muted mb-1">

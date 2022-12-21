@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from "react"
 import Page from "../Page"
 import Select from 'react-select'
-import axios from "axios";
 import SaveTaxType from "./SaveTaxType";
 import EditTaxType from "./EditTaxType";
-import Button from "react-bootstrap/Button";
-import {useNavigate} from 'react-router-dom';
+import InfoTaxType from "./InfoTaxType";
+import common_axios from '../Axios_default/Axios_default'
 
 function ManageTaxType() {
-    const navigate = useNavigate()
     const [userOptions, setUserOptions] = useState([])
     const [selected, setSelected] = useState([])
     const [show,setShow]= React.useState(false);
     const [edit,setEdit]= React.useState(false);
+    const [pick,setPick]= React.useState(false);
 
     const [showedTaxType, setShowedTaxType] = useState({
         id:"",
@@ -24,7 +23,8 @@ function ManageTaxType() {
 
     const handleChange = (e) => {
         setSelected(e)
-        axios.get(`/taxtype/${e.value}`).then((response) => {
+        setPick(true)
+        common_axios.get(`/taxtype/${e.value}`).then((response) => {
             setShowedTaxType({
                 ...showedTaxType,
                 id: response.data.id,
@@ -39,9 +39,8 @@ function ManageTaxType() {
     useEffect(() => {
         const getData = async () => {
             const arr = [];
-            axios.get("/taxtype/list").then((response) => {
-                let result = response.data;
-                result.map((taxType) => {
+            common_axios.get("/taxtype/list").then((response) => {
+                response.data.map((taxType) => {
                     return arr.push({value: taxType.id, label: taxType.name});
                 });
                 setUserOptions(arr)
@@ -50,14 +49,15 @@ function ManageTaxType() {
                     console.log(error)
                 });
         };
-        getData()
+        getData().then()
     }, []);
 
-    function handleDelete(id) {
+    function handleDelete() {
         setEdit(false)
-        if (id !== "") {
-            axios.delete(`/taxtype/${id}`)
-                .catch((error) => setShow(true))
+        setPick(false)
+        if (showedTaxType.id !== "") {
+            common_axios.delete(`/taxtype/${showedTaxType.id}`)
+                .catch(() => setShow(true))
             setShowedTaxType({
                 ...showedTaxType,
                 id: "",
@@ -66,7 +66,7 @@ function ManageTaxType() {
                 institutionToPayForPhoneNumber: "?",
                 description: "?"
             })
-            setSelected(undefined)
+            setSelected(null)
         }
     }
 
@@ -82,17 +82,7 @@ function ManageTaxType() {
                         value={selected}
                         onChange={handleChange}
                     />
-                    <div className="col-lg-7 py-3 py-md-5">
-                        <p className="lead">Data of selected Tax Type:</p>
-                        <p>Name: <strong>{showedTaxType.name}</strong>.</p>
-                        <p>Institution: <strong>{showedTaxType.institutionToPayFor}</strong>.</p>
-                        <p>Phone number of institution: <strong>{showedTaxType.institutionToPayForPhoneNumber}</strong>.</p>
-                        <p>Description: <strong>{showedTaxType.description}</strong>.</p>
-                    </div>
-                    <div className="row row-cols-2">
-                        <Button variant="warning" onClick={() => setEdit(true)}>Edit</Button>
-                        <Button variant="danger" onClick={handleDelete} onMouseDown={() => (navigate("/tax_type"))}>Delete</Button>
-                    </div>
+                    { pick ? <InfoTaxType showedTaxType={showedTaxType} setEdit={setEdit} handleDelete={handleDelete}/> : undefined }
                 </div>
                 { edit ? <EditTaxType showedTaxType={showedTaxType} setShowedTaxType={setShowedTaxType} setEdit={setEdit}/> : <SaveTaxType/>}
                 { show ? <Error/> : null }

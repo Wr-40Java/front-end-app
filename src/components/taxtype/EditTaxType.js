@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import axios from "axios"
-import Button from "react-bootstrap/Button";
+import Button from "react-bootstrap/Button"
+import common_axios from '../Axios_default/Axios_default'
 
 function EditTaxType(props) {
     const [show,setShow]= React.useState(false);
@@ -31,7 +31,7 @@ function EditTaxType(props) {
             description: data.description
         };
         console.log(taxTypeData)
-        axios.put("/taxtype", taxTypeData)
+        common_axios.put("/taxtype", taxTypeData)
             .then((response) => {
                 console.log(response.status);
             })
@@ -44,6 +44,7 @@ function EditTaxType(props) {
 
     return (
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 container">
+            <h5>Here you can edit <strong>{data.name}</strong> Tax Type!</h5>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="email-register" className="text-muted mb-1">

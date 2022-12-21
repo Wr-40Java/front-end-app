@@ -16,6 +16,7 @@ import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave";
 import SuccesfulRegistration from "./components/SuccesfulRegistration"
 import EditProfileSuccess from "./components/EditProfileSuccess"
 import EditProfile from "./components/EditProfile"
+import ManageTaxType from "./components/taxtype/ManageTaxType"
 import AuthProvider from "./components/context/AuthProvider"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 
@@ -39,6 +40,7 @@ function Main() {
                     <Route path="/insurance_type" element={<InsuranceType />} />
                     <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />
                     <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
+                    <Route path="/tax_type" element={<ManageTaxType />} />
                     <Route path="/about-us" element={<About />} />
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/edit-profile" element={<EditProfile />} />

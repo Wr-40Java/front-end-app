@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import {useNavigate} from 'react-router-dom';
 
 
-function ManageTaxType(props) {
+function InfoTaxType(props) {
     const navigate = useNavigate()
 
     return (
@@ -24,4 +24,4 @@ function ManageTaxType(props) {
 
 }
 
-export default ManageTaxType
+export default InfoTaxType

@@ -6,7 +6,8 @@ function TaxCreate() {
     const [taxTypeOptions, setTaxTypeOptions] = useState([])
     const [selected, setSelected] = useState([])
     const [show, setShow] = React.useState(false);
-    let chosenTaxTypeId = 0;
+    const [chosenTaxTypeId, setChosenTaxTypeId] = useState()
+    let latestTaxId = 0;
 
     const [data, setData] = useState({
         costOfTransaction: ""
@@ -14,9 +15,7 @@ function TaxCreate() {
 
     const handleSelect = (e) => {
         setSelected(e)
-        chosenTaxTypeId = e.value;
-        console.log(e)
-        console.log(chosenTaxTypeId)
+        setChosenTaxTypeId(e.value)
     }
 
     const handleChange = (e) => {
@@ -27,12 +26,13 @@ function TaxCreate() {
         });
     };
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault()
+        setSelected(null)
         const taxData = {
             costOfTransaction: data.costOfTransaction
         };
-        common_axios.post("/tax", taxData)
+        await common_axios.post("/tax", taxData)
             .then((response) => {
                 console.log(response.status);
                 setData({
@@ -44,8 +44,32 @@ function TaxCreate() {
                 console.log(error)
                 setShow(true);
             });
-        // common_axios.get()   TO DO: изменить бэкэнд такса, чтобы сохраняло одновременно с подключенным такстайпом
+
+        await common_axios.get("/tax/get")
+            .then((response) => {
+                console.log(response.status);
+                const idArray = [];
+                response.data.map((tax) => {
+                    return idArray.push(tax.id)
+                })
+                latestTaxId = idArray[idArray.length - 1];
+            })
+            .catch((error) => {
+                console.log(error)
+                setShow(true);
+            });
+
+        await common_axios.post(`/tax/link/${latestTaxId}/${chosenTaxTypeId}`)
+            .then((response) => {
+                console.log(response.status);
+            })
+            .catch((error) => {
+                common_axios.delete(`/tax/${latestTaxId}`)
+                console.log(error)
+                setShow(true);
+            });
     }
+
 
     useEffect(() => {
         const taxTypeArray = [];
@@ -62,7 +86,7 @@ function TaxCreate() {
 
     return (
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 container">
-            <h4>Here you can add new Tax.</h4>
+            <h4>Here you can create new Tax.</h4>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name-register" className="text-muted mb-1">
@@ -84,7 +108,7 @@ function TaxCreate() {
                     />
                 </div>
                 <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
-                    Add
+                    Save
                 </button>
             </form>
             {show ? <Error/> : null}
@@ -94,9 +118,9 @@ function TaxCreate() {
 
 const Error = () => (
     <div id="results" className="search-results">
-        <h4 className="text-danger">
-            Check your data
-        </h4>
+        <h6 className="text-danger">
+            Check input your data<br/>Tax Type must be created before this creation!
+        </h6>
     </div>
 )
 

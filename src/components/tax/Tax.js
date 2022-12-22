@@ -62,7 +62,7 @@ function Tax() {
             <h2 className="text-center">Here you can change your tax!</h2>
             <div className="row">
                 <div className="col-lg-7 py-3 py-md-5">
-                    <p>The available Tax are shown here. <strong>Select</strong> the required one from <strong>the list</strong> or <strong>create</strong> a new one.</p>
+                    <p>The available Taxes are shown here. <strong>Select</strong> the required one from <strong>the list</strong> or <strong>create</strong> a new one.</p>
                     <Select
                         placeholder= "Select a Tax"
                         options={taxOptions}

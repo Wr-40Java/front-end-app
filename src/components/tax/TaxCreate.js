@@ -45,7 +45,7 @@ function TaxCreate() {
                 setShow(true);
             });
 
-        await common_axios.get("/tax/get")
+        await common_axios.get("/tax/list")
             .then((response) => {
                 console.log(response.status);
                 const idArray = [];

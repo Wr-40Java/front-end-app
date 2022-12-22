@@ -14,7 +14,9 @@ function Tax() {
     const [pick,setPick]= React.useState(false);
 
     const [showedTax, setShowedTax] = useState({
-        costOfTransaction:""
+        id: "",
+        costOfTransaction: "?",
+        taxType: "?"
     })
 
     const handleChange = (e) => {
@@ -24,14 +26,16 @@ function Tax() {
         common_axios.get(`/tax/${e.value}`).then((response) => {
             setShowedTax({
                 ...showedTax,
-                costOfTransaction: response.data.costOfTransaction
+                id: response.data.id,
+                costOfTransaction: response.data.costOfTransaction,
+                taxType: response.data.taxType
             })
         })
     };
 
     useEffect(() => {
         const arr = [];
-        common_axios.get("/tax/get").then((response) => {
+        common_axios.get("/tax/list").then((response) => {
             response.data.map((tax) => {
                 return arr.push({value: tax.id, label: tax.id});
             });
@@ -51,7 +55,8 @@ function Tax() {
             setShowedTax({
                 ...showedTax,
                 id: "",
-                costOfTransaction: "",
+                costOfTransaction: "?",
+                taxType: "?"
             })
             setSelected(null)
         }
@@ -71,7 +76,12 @@ function Tax() {
                     />
                     { pick ? <TaxInfo showedTax={showedTax} setEdit={setEdit} handleDelete={handleDelete}/> : undefined }
                 </div>
-                { edit ? <TaxUpdate showedTax={showedTax} setShowedTax={setShowedTax} setEdit={setEdit}/> : <TaxCreate/>}
+                { edit ? <TaxUpdate
+                    showedTax={showedTax}
+                    setShowedTax={setShowedTax}
+                    setEdit={setEdit}
+                    setPick={setPick}
+                    setSelected={setSelected}/> : <TaxCreate/>}
                 { show ? <Error/> : null }
             </div>
         </Page>

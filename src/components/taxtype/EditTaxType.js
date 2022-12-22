@@ -30,7 +30,6 @@ function EditTaxType(props) {
             institutionToPayForPhoneNumber: data.institutionToPayForPhoneNumber,
             description: data.description
         };
-        console.log(taxTypeData)
         common_axios.put("/taxtype", taxTypeData)
             .then((response) => {
                 console.log(response.status);

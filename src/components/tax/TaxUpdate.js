@@ -1,13 +1,25 @@
-import React, { useState } from "react"
+import React, {useEffect, useState} from "react"
 import Button from "react-bootstrap/Button"
 import common_axios from '../Axios_default/Axios_default'
+import Select from "react-select";
 
 function TaxUpdate(props) {
     const [show,setShow]= React.useState(false);
+    const [taxTypeOptions, setTaxTypeOptions] = useState([])
+    const [selected, setSelected] = useState([])
+    const [chosenTaxTypeId, setChosenTaxTypeId] = useState()
 
     const [data,setData] = useState({
+        id: props.showedTax.id,
         costOfTransaction: props.showedTax.costOfTransaction,
+        taxType: props.showedTax.taxType
     })
+
+    const handleSelect = (e) => {
+        setSelected(e)
+        console.log(e)
+        setChosenTaxTypeId(e.value)
+    }
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -17,50 +29,74 @@ function TaxUpdate(props) {
         });
     };
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault()
-        const taxData = {
-            costOfTransaction: data.costOfTransaction
-        };
-        console.log(taxData)
-        common_axios.put("/tax", taxData)
-            .then((response) => {
-                console.log(response.status);
-            })
+        if (chosenTaxTypeId !== undefined) {
+            const taxData = {
+                id: data.id,
+                costOfTransaction: data.costOfTransaction
+            };
+            await common_axios.put("/tax", taxData)
+                .then((response) => {
+                    console.log(response.status);
+                })
+                .catch((error) => {
+                    console.log(error)
+                    setShow(true);
+                });
+
+            await common_axios.post(`/tax/link/${data.id}/${chosenTaxTypeId}`)
+                .then((response) => {
+                    console.log(response.status);
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+            props.setEdit(false)
+        } else {
+            setShow(true);
+        }
+
+
+    }
+
+    useEffect(() => {
+        const taxTypeArray = [];
+        common_axios.get("/taxtype/list").then((response) => {
+            response.data.map((taxType) => {
+                return taxTypeArray.push({value: taxType.id, label: taxType.name});
+            });
+            setTaxTypeOptions(taxTypeArray);
+        })
             .catch((error) => {
                 console.log(error)
                 setShow(true);
             });
-        props.setEdit(false)
-    }
+    },[]);
 
     return (
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 container">
-            <h5>Here you can edit <strong>{data.name}</strong> Tax Type!</h5>
+            <h5>Here you can edit Tax <strong>№{data.id}</strong>!</h5>
+            <p><strong>Remember</strong> that when updating the data, system <strong>create a new Tax with the biggest id</strong> and <strong>delete the old Tax</strong>.</p>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="email-register" className="text-muted mb-1">
-                        <small>Institution to pay for:</small>
+                    <label htmlFor="name-register" className="text-muted mb-1">
+                        <small>Cost Of Transaction:</small>
                     </label>
-                    <input id="email-register" name="institutionToPayFor" className="form-control"
-                           type="text" placeholder="Fill institution" autoComplete="off"
-                           value={data.institutionToPayFor} onChange={handleChange} />
+                    <input id="name-register" name="costOfTransaction" className="form-control"
+                           type="text" placeholder="Enter cost here" autoComplete="off"
+                           value={data.costOfTransaction} onChange={handleChange}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="phone-number-register" className="text-muted mb-1">
-                        <small>Phone Number of Institution:</small>
+                    <label htmlFor="name-register" className="text-muted mb-1">
+                        <small>Choose available Tax Type:</small>
                     </label>
-                    <input id="phone-number-register" name="institutionToPayForPhoneNumber" className="form-control"
-                           type="text" placeholder="Fill phone number" autoComplete="off"
-                           value={data.institutionToPayForPhoneNumber} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="surname-register" className="text-muted mb-1">
-                        <small>Description:</small>
-                    </label>
-                    <input id="surname-register" name="description" className="form-control"
-                           type="text" placeholder="Small description" autoComplete="off"
-                           value={data.description} onChange={handleChange} />
+                    <Select
+                        placeholder= "Select a Tax Type"
+                        options={taxTypeOptions}
+                        value={selected}
+                        onChange={handleSelect}
+                    />
                 </div>
                 <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                     Update Tax Type
@@ -76,9 +112,9 @@ function TaxUpdate(props) {
 
 const Error = () => (
     <div id="results" className="search-results">
-        <h4 className="text-danger">
-            Check your data
-        </h4>
+        <h6 className="text-danger">
+            Check input your data<br/>Don`t forget to choose Tax Type!
+        </h6>
     </div>
 )
 

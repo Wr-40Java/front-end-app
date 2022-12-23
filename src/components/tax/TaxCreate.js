@@ -89,15 +89,15 @@ function TaxCreate() {
             <h4>Here you can create new Tax.</h4>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name-register" className="text-muted mb-1">
+                    <label htmlFor="costOfTransaction" className="text-muted mb-1">
                         <small>Cost Of Transaction:</small>
                     </label>
-                    <input id="name-register" name="costOfTransaction" className="form-control"
+                    <input id="costOfTransaction" name="costOfTransaction" className="form-control"
                            type="number" placeholder="Enter cost here" autoComplete="off"
                            value={data.costOfTransaction} onChange={handleChange}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="name-register" className="text-muted mb-1">
+                    <label htmlFor="selectTaxType" className="text-muted mb-1">
                         <small>Choose available Tax Type:</small>
                     </label>
                     <Select
@@ -119,7 +119,7 @@ function TaxCreate() {
 const Error = () => (
     <div id="results" className="search-results">
         <h6 className="text-danger">
-            Check input your data<br/>Tax Type must be created before this creation!
+            Check your input data<br/>Tax Type must be created before this operation!
         </h6>
     </div>
 )

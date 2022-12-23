@@ -116,7 +116,7 @@ function EditProfile() {
                                 <small>Email</small>
                             </label>
                             <input id="email-register" name="email" className="form-control"
-                                   type="text" placeholder="you@example.com" autoComplete="off"
+                                   type="email" placeholder="you@example.com" autoComplete="off"
                                    value={data.email} onChange={handleChange} />
                         </div>
                         <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">

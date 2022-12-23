@@ -1,10 +1,18 @@
-import React from "react"
+import React, {useContext} from "react"
+import context from "react-bootstrap/esm/AccordionContext";
 import { Link, useNavigate } from "react-router-dom"
+import {AuthContext} from '../index'
 
 function HeaderLoggedIn(props) {
     const navigate = useNavigate();
+    const {setLoggedIn, setUsername} = useContext(AuthContext);
+
 
     function handleLogOut() {
+        localStorage.removeItem('credentials')
+        localStorage.removeItem('username')
+        setLoggedIn(false)
+        setUsername(false)
         props.setLoggedIn(false)
         localStorage.removeItem("appUserId")
         localStorage.removeItem("appUserName")

@@ -93,7 +93,7 @@ function TaxCreate() {
                         <small>Cost Of Transaction:</small>
                     </label>
                     <input id="name-register" name="costOfTransaction" className="form-control"
-                           type="text" placeholder="Enter cost here" autoComplete="off"
+                           type="number" placeholder="Enter cost here" autoComplete="off"
                            value={data.costOfTransaction} onChange={handleChange}/>
                 </div>
                 <div className="form-group">

@@ -14,8 +14,8 @@ import InsuranceType from "./components/insurancetype/InsuranceType";
 import InsuranceTypeUpdate from "./components/insurancetype/InsuranceTypeUpdate";
 import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave";
 import SuccesfulRegistration from "./components/SuccesfulRegistration"
-import EditProfileSuccess from "./components/EditProfileSuccess"
-import EditProfile from "./components/EditProfile"
+import EditProfileSuccess from "./components/profilepage/EditProfileSuccess"
+import EditProfile from "./components/profilepage/EditProfile"
 import ManageTaxType from "./components/taxtype/ManageTaxType"
 import AuthProvider from "./components/context/AuthProvider"
 import { ProtectedRoute } from "./components/ProtectedRoute"

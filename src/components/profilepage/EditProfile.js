@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import React, {useEffect, useState} from "react";
-import Page from "./Page";
-import common_axios from './Axios_default/Axios_default'
+import Page from "../Page";
+import common_axios from '../Axios_default/Axios_default'
 
 
 function EditProfile() {
@@ -108,7 +108,7 @@ function EditProfile() {
                                 <small>Phone Number</small>
                             </label>
                             <input id="phone-number-register" name="phoneNumber" className="form-control"
-                                   type="text" placeholder="New phone number" autoComplete="off"
+                                   type="number" placeholder="New phone number" autoComplete="off"
                                    value={data.phoneNumber} onChange={handleChange} />
                         </div>
                         <div className="form-group">

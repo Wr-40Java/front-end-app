@@ -68,7 +68,7 @@ function SaveTaxType() {
                         <small>Phone Number of Institution:</small>
                     </label>
                     <input id="phone-number-register" name="institutionToPayForPhoneNumber" className="form-control"
-                           type="text" placeholder="Fill phone number" autoComplete="off"
+                           type="number" placeholder="Fill phone number" autoComplete="off"
                            value={data.institutionToPayForPhoneNumber} onChange={handleChange} />
                 </div>
                 <div className="form-group">

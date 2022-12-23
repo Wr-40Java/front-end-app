@@ -33,25 +33,25 @@ function Main() {
 
     return (
         <BrowserRouter>
-        <AuthContext.Provider value={{loggedIn, username, setLoggedIn, setUsername}}>
-            <Header />
-            <Routes>
+            <AuthContext.Provider value={{loggedIn, username, setLoggedIn, setUsername}}>
+                <Header />
+                <Routes>
                     <Route path="/" element={loggedIn ? <Home /> : <HomeGuest />} />
-                <Route element={<ProtectedRoute/>}>
-                    <Route path="/insurance_type" element={<InsuranceType />} />
-                    <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />
-                    <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
-                    <Route path="/tax_type" element={<ManageTaxType />} />
-                    <Route path="/tax" element={<Tax />} />
                     <Route path="/about-us" element={<About />} />
                     <Route path="/terms" element={<Terms />} />
-                    <Route path="/edit-profile" element={<EditProfile />} />
-                    <Route path="/successfull/login" element={<SuccesfulRegistration/>}/>
-                    <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>
+                    <Route element={<ProtectedRoute/>}>
+                        <Route path="/insurance_type" element={<InsuranceType />} />
+                        <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />
+                        <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
+                        <Route path="/tax_type" element={<ManageTaxType />} />
+                        <Route path="/tax" element={<Tax />} />
+                        <Route path="/edit-profile" element={<EditProfile />} />
+                        <Route path="/successfull/login" element={<SuccesfulRegistration/>}/>
+                        <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>
+                    </Route>
                     <Route path="/*" element={<NotFound />} />
-                </Route>  
-            </Routes>
-            <Footer />
+                </Routes>
+                <Footer />
             </AuthContext.Provider>
         </BrowserRouter>
     )

@@ -3,17 +3,17 @@ import React, {useState} from "react";
 import axios from "axios";
 
 
-const TechnicalServiceSave = () =>{
+const TechnicalServiceSave = () => {
     const navigate = useNavigate();
 
-    const [data,setData] = useState({
-        cost:"",
-        companyResponsibleForName:"",
-        companyResponsibleForPhoneNumber:"",
-        reason:"",
-        description:""
+    const [data, setData] = useState({
+        cost: "",
+        companyResponsibleForName: "",
+        companyResponsibleForPhoneNumber: "",
+        reason: "",
+        description: ""
     })
-    const  [show,setShow]= React.useState(false);
+    const [show, setShow] = React.useState(false);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -42,56 +42,59 @@ const TechnicalServiceSave = () =>{
             });
 
     }
-    return(
+    return (
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5">
             <form onSubmit={handleSubmit}>
+                <h3 className="p-3 text-center">Type your info about technical service.</h3>
                 <div className="form-group">
                     <label htmlFor="cost" className="text-muted mb-1">
                         <small>Cost</small>
                     </label>
                     <input id="cost" name="cost" className="form-control"
                            type="text" placeholder="Cost" autoComplete="off"
-                           value={data.cost} onChange={handleChange} />
+                           value={data.cost} onChange={handleChange}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="companyResponsibleForName" className="text-muted mb-1">
-                        <small>Company responsible for name  </small>
+                        <small>Company responsible for </small>
                     </label>
-                    <input id="surname-companyResponsibleForName" name="companyResponsibleForName" className="form-control"
-                           type="text" placeholder="Company responsible for name" autoComplete="off"
-                           value={data.companyResponsibleForName} onChange={handleChange} />
+                    <input id="companyResponsibleForName" name="companyResponsibleForName" className="form-control"
+                           type="text" placeholder="Name of the company responsible for service" autoComplete="off"
+                           value={data.companyResponsibleForName} onChange={handleChange}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="companyResponsibleForPhoneNumber" className="text-muted mb-1">
-                        <small>Phone Number</small>
+                        <small>Phone Number of the company</small>
                     </label>
-                    <input id="companyResponsibleForPhoneNumber" name="companyResponsibleForPhoneNumber" className="form-control"
-                           type="text" placeholder="Company responsible for phone number" autoComplete="off"
-                           value={data.companyResponsibleForPhoneNumber} onChange={handleChange} />
+                    <input id="companyResponsibleForPhoneNumber" name="companyResponsibleForPhoneNumber"
+                           className="form-control"
+                           type="text" placeholder="Phone number" autoComplete="off"
+                           value={data.companyResponsibleForPhoneNumber} onChange={handleChange}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="reason" className="text-muted mb-1">
-                        <small>Reason</small>
+                        <small>Reason for service</small>
                     </label>
                     <input id="reason" name="reason" className="form-control"
                            type="text" placeholder="Reason" autoComplete="off"
-                           value={data.reason} onChange={handleChange} />
+                           value={data.reason} onChange={handleChange}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="description" className="text-muted mb-1">
                         <small>Description</small>
                     </label>
                     <input id="description" name="description" className="form-control"
-                           type="text" placeholder="description" autoComplete="off"
-                           value={data.description} onChange={handleChange} />
+                           type="text" placeholder="Description" autoComplete="off"
+                           value={data.description} onChange={handleChange}/>
                 </div>
-                <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
+                <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block"
+                        onMouseDown={() => (navigate("/technical_service"))}>
                     Add
                 </button>
             </form>
             {
-                show?
-                    <Error/>:
+                show ?
+                    <Error/> :
                     null
             }
         </div>

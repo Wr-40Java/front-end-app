@@ -20,6 +20,7 @@ import ManageTaxType from "./components/taxtype/ManageTaxType"
 import AuthProvider from "./components/context/AuthProvider"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import Tax from "./components/tax/Tax";
+import TechnicalService from "./components/TechnicalService/TechnicalService";
 import TechnicalServiceSave from "./components/TechnicalService/TechnicalServiceSave"
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
@@ -46,7 +47,8 @@ function Main() {
                         <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
                         <Route path="/tax_type" element={<ManageTaxType />} />
                         <Route path="/tax" element={<Tax />} />
-                        <Route path="/technical_service" element={<TechnicalServiceSave/>} />
+                        <Route path="/technical_service" element={<TechnicalService/>} />
+                        <Route path="/technical_service/save" element={<TechnicalServiceSave/>} />
                         <Route path="/edit-profile" element={<EditProfile />} />
                         <Route path="/successfull/login" element={<SuccesfulRegistration/>}/>
                         <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>

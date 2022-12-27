@@ -55,7 +55,7 @@ const BurgerMenuData = [
     },
     {
         title: 'Technical service',
-        path: '/service',
+        path: '/technical_service',
         icon: <MdIcons.MdCleaningServices />,
         cName: 'nav-text'
     }

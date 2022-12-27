@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import common_axios from '../Axios_default/Axios_default';
 
 const InsuranceTypeUpdate = () => {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ const InsuranceTypeUpdate = () => {
             costsPerYear: data.costsPerYear,
             coveredCompensation: data.coveredCompensation,
         };
-        axios.post("http://localhost:8080/api/insurancetype", insCompData)
+        common_axios.post("http://localhost:8080/api/insurancetype", insCompData)
             .then((response) => {
             console.log(response.status);
                 navigate('/insurance_type');

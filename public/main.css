@@ -149,7 +149,7 @@ button:disabled{
 .react-bootstrap-button-success{
   width: 80px;
   position: fixed;
-  top: 320px;
+  top: 220px;
   left: 80px;
   padding: 5px 170px 10px 40px;
   white-space: nowrap;
@@ -158,7 +158,7 @@ button:disabled{
 .react-bootstrap-button-warning{
   width: 100px;
   position: fixed;
-  top: 400px;
+  top: 300px;
   left: 80px;
   padding: 5px 130px 10px 80px;
   text-align: center;

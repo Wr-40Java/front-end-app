@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import InsuranceTypeSelect from './InsuranceTypeSelect'
 import InsuranceType from './InsuranceType';
 import { useFormik, useField, Form, Field, Formik } from 'formik';
 import { BasicFormValidation } from './BasicFormValidation';
 import CustomInput from './CustomInput';
 import CustomSelect from './CustomSelect';
-
-
+import common_axios from '../Axios_default/Axios_default';
 
 const InsuranceTypeUpdate = () => {
 
@@ -19,9 +17,8 @@ const InsuranceTypeUpdate = () => {
     const [errorMsg, showErrorMsg] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/insurancetype/list")
-            .then((response) => { console.log(response); return response.json(); })
-            .then(response => { setInsTypes(response); setFetchedTypes(true); })            
+        common_axios.get("/insurancetype/list")
+            .then(response => { setInsTypes(response.data); setFetchedTypes(true); }) 
             .catch((error) => {
                 showErrorMsg(true);
                 setFetchedTypes(false);
@@ -32,17 +29,19 @@ const InsuranceTypeUpdate = () => {
         console.log('sent');
         console.log(values);
         console.log(actions);
-        setIsSending(true);
-        axios.put("http://localhost:8080/api/insurancetype", values)
+            setIsSending(true);
+            common_axios.put("/insurancetype", values)
             .then((response) => {
                 console.log(response.status);
+                setFetchedTypes(false);
+                navigate('/insurance_type');
             })
             .catch((error) => {
                 showErrorMsg(true);
                 setFetchedTypes(false);
             });
-        setIsSending(false);
-        actions.resetForm();
+            setIsSending(false);
+            actions.resetForm();
     }
 
     return (

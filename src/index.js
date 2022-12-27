@@ -14,33 +14,47 @@ import InsuranceType from "./components/insurancetype/InsuranceType";
 import InsuranceTypeUpdate from "./components/insurancetype/InsuranceTypeUpdate";
 import InsuranceTypeSave from "./components/insurancetype/InsuranceTypeSave";
 import SuccesfulRegistration from "./components/SuccesfulRegistration"
-import EditProfileSuccess from "./components/EditProfileSuccess"
-import EditProfile from "./components/EditProfile"
+import EditProfileSuccess from "./components/profilepage/EditProfileSuccess"
+import EditProfile from "./components/profilepage/EditProfile"
+import ManageTaxType from "./components/taxtype/ManageTaxType"
+import AuthProvider from "./components/context/AuthProvider"
+import { ProtectedRoute } from "./components/ProtectedRoute"
+import Tax from "./components/tax/Tax";
 import TechnicalServiceSave from "./components/TechnicalServiceSave"
 
 Axios.defaults.baseURL = "http://localhost:8080/api"
 
+export const AuthContext = createContext({});
+
+
 function Main() {
 
-    const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("usernameOfUser")))
+    const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('username')))
+    const [username, setUsername] = useState(localStorage.getItem('username'))
 
     return (
         <BrowserRouter>
-            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-            <Routes>
-                <Route path="/technical_service" element={<TechnicalServiceSave/>} />
-                <Route path="/" element={loggedIn ? <Home /> : <HomeGuest />} />
-                <Route path="/insurance_type" element={<InsuranceType />} />
-                <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />
-                <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
-                <Route path="/about-us" element={<About />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/edit-profile" element={<EditProfile />} />
-                <Route path="/successfull/login" element={<SuccesfulRegistration/>}/>
-                <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>
-                <Route path="/*" element={<NotFound />} />
-            </Routes>
-            <Footer />
+            <AuthContext.Provider value={{loggedIn, username, setLoggedIn, setUsername}}>
+                <Header />
+                <Routes>
+                    <Route path="/" element={loggedIn ? <Home /> : <HomeGuest />} />
+                    <Route path="/about-us" element={<About />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route element={<ProtectedRoute/>}>
+                        <Route path="/insurance_type" element={<InsuranceType />} />
+                        <Route path="/insurance_type/update" element={<InsuranceTypeUpdate />} />
+                        <Route path="/insurance_type/save" element={<InsuranceTypeSave />} />
+                        <Route path="/tax_type" element={<ManageTaxType />} />
+                        <Route path="/tax" element={<Tax />} />
+                        <Route path="/technical_service" element={<TechnicalServiceSave/>} />
+                        <Route path="/edit-profile" element={<EditProfile />} />
+                        <Route path="/successfull/login" element={<SuccesfulRegistration/>}/>
+                        <Route path="/edit-profile-success" element={<EditProfileSuccess/>}/>
+                    </Route>
+                    <Route path="/*" element={<NotFound />} />
+                </Routes>
+                <Footer />
+            </AuthContext.Provider>
         </BrowserRouter>
     )
 }

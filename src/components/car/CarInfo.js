@@ -6,7 +6,7 @@ import DeleteCar from "./DeleteCar";
 
 
 
-const url="http://localhost:8080/api/car/";
+const url="http://localhost:8080/api/cardiary/car/get/";
 const CarInfo = () => {
     let {vinNumber} = useParams();
     const [carData, setCarData] = useState({
@@ -104,7 +104,7 @@ const CarInfo = () => {
                     </ul>
                 }
             </div>
-            <DeleteCar vinNumber={carData.car.vinnumber} />
+           {/* <DeleteCar vinNumber={carData.car.vinnumber} />*/}
         </div>
   )
 }

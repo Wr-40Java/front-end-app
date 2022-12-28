@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
+import CarBrandList from "./CarBrandList";
+import CarEngineType from "./CarEngineType";
 
 
 
-const CarBrands = ['KIA','NISSAN','VOLVO']
+
 const AddCar = () =>{
     let user = useParams();
     const navigate = useNavigate();
@@ -18,10 +20,11 @@ const AddCar = () =>{
         productionYear:"",
         horsePower:"",
         vinNumber:"",
-        urlCar:"http://localhost:8080/api/car",
-        urlUser:"http://localhost:8080/api/user/addCar"
+        urlCar:"http://localhost:8080/api/cardiary/car/save",
+        urlUser:"http://localhost:8080/api/cardiary/user/addCar"
     })
     const handleChange = (e) => {
+        console.log(e.target.value)
         const value = e.target.value;
         setData({
             ...data,
@@ -71,29 +74,14 @@ const AddCar = () =>{
                             maxLength="17" minLength="17"
                     />
                 </div>
-                <div className="form-group">
-                    <select id="brand-register"
-                            name="brand" autoComplete="off" value={data.brand} onChange={handleChange}
-                    >
-                        <option> Select option...</option>
-                        {
-                            CarBrands.map((brand)=>(
-                                <option key={brand}>{brand}</option>
-                            ))
-                        }
-                        </select>
-                </div>
+
+                <CarBrandList data={data.brand}   handleChange={handleChange}/>
                 <div className="form-group">
                     <input id="model-register" type="text" autoComplete="off" name="model"
                            placeholder="Your car model" onChange={handleChange} value={data.model}
                     />
                 </div>
-                <div className="form-group">
-
-                    <input id="engineType-register" type="text" autoComplete="off" name="engineType"
-                           placeholder="Your car engine type" onChange={handleChange} value={data.engineType}
-                    />
-                </div>
+                <CarEngineType data={data.engineType} handleChange={handleChange}/>
                 <div className="form-group">
 
                     <input id="bodyType-register" type="text" autoComplete="off" name="bodyType"

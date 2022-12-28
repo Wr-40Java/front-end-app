@@ -13,7 +13,7 @@ const Register = () =>{
         username:"",
         email:"",
         password:"",
-        url:"http://localhost:8080/api/user"
+        url:"http://localhost:8080/api/cardiary/user/save"
     })
     const  [show,setShow]= React.useState(false);
 
@@ -54,7 +54,7 @@ const Register = () =>{
                     </label>
                     <input id="name-register" name="name" className="form-control"
                            type="text" placeholder="Your name" autoComplete="off"
-                           value={data.name} onChange={handleChange} />
+                           value={data.name} onChange={handleChange}  minLength="1" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="surname-register" className="text-muted mb-1">
@@ -62,14 +62,15 @@ const Register = () =>{
                     </label>
                     <input id="surname-register" name="surname" className="form-control"
                            type="text" placeholder="Your surname" autoComplete="off"
-                           value={data.surname} onChange={handleChange} />
+                           value={data.surname} onChange={handleChange}  minLength="1" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="phone-number-register" className="text-muted mb-1">
                         <small>Phone Number</small>
                     </label>
                     <input id="phone-number-register" name="phoneNumber" className="form-control"
-                           type="text" placeholder="Your phone number" autoComplete="off"
+                           type="text" placeholder="Your phone number" autoComplete="off" maxLength="14"
+                           minLength="8"
                            value={data.phoneNumber} onChange={handleChange} />
                 </div>
                 <div className="form-group">
@@ -78,7 +79,7 @@ const Register = () =>{
                     </label>
                     <input id="username-register" name="username" className="form-control"
                            type="text" placeholder="Pick a username" autoComplete="off"
-                           value={data.username} onChange={handleChange} />
+                           value={data.username} onChange={handleChange}  minLength="2" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="email-register" className="text-muted mb-1">
@@ -86,14 +87,14 @@ const Register = () =>{
                     </label>
                     <input id="email-register" name="email" className="form-control"
                            type="text" placeholder="you@example.com" autoComplete="off"
-                           value={data.email} onChange={handleChange} />
+                           value={data.email} onChange={handleChange} minLength="8" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password-register" className="text-muted mb-1">
                         <small>Password</small>
                     </label>
                     <input id="password-register" name="password" className="form-control"
-                           type="password" placeholder="Create a password"
+                           type="password" placeholder="Create a password" minLength="8" maxLength="20"
                             value={data.password} onChange={handleChange}/>
                 </div>
                 <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
@@ -111,7 +112,7 @@ const Register = () =>{
 const Error = () => (
     <div id="results" className="search-results">
         <h4 className="text-danger">
-        Check your data
+        Check your password or number
         </h4>
     </div>
 )

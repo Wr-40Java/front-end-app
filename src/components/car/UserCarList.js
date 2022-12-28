@@ -2,13 +2,17 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import DeleteCar from "./DeleteCar";
+import DeleteAllCars from "./DeleteAllCars";
 
-const getUser="http://localhost:8080/api/user/"
+
 const UserCarList = (userName) => {
+    const getUser="http://localhost:8080/api/cardiary/user/"
     const [data,setData] = useState(  {
      cars: []
     })
+
     const navigate = useNavigate();
+
     useEffect(() => {
         if(userName!=null){
         const url = getUser+userName.userName+"/cars"
@@ -17,9 +21,12 @@ const UserCarList = (userName) => {
             setData({cars});
         });
     }}, []);
+
+
+
     if(userName.userName!=null) {
 
-        return (<div>
+        return (<div className="justify-content-center">
             <table className="table table-striped">
             <thead>
             <tr>
@@ -52,7 +59,7 @@ const UserCarList = (userName) => {
                             <button type="button" className="btn btn-info"
                                     onClick={() => (navigate("/car-info/" + car.vinnumber))}>More info
                             </button>
-                            <DeleteCar vinNumber={car.vinnumber} stateChanger={setData}/>
+                            <DeleteCar vinNumber={car.vinnumber} stateChanger={setData} username={userName.userName}/>
                             <button type="button" className="btn btn-info" onClick={() =>navigate("/car-edit/"+car.vinnumber)}>
                                 Edit Car
                             </button>
@@ -66,6 +73,7 @@ const UserCarList = (userName) => {
                         }>
                     Add new Car
                 </button>
+                {/*<DeleteAllCars/>*/}
             </div>
         )
     }else {

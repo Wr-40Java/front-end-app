@@ -3,12 +3,14 @@ import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import React from "react";
 import error from "../Error";
+import CarBrandList from "./CarBrandList";
+import CarEngineType from "./CarEngineType";
 
 
 
 const CarBrands = ['KIA','NISSAN','VOLVO','TOYOTA','Toyota']
-const url="http://localhost:8080/api/car/";
-const urlPut = "http://localhost:8080/api/car";
+const url="http://localhost:8080/api/cardiary/car/get/";
+const urlPut = "http://localhost:8080/api/cardiary/car/update";
 const EditCar = () => {
     let {vinNumber} = useParams();
     const  [show,setShow]= useState(false);
@@ -48,7 +50,7 @@ const EditCar = () => {
             productionYear:carData.car.productionYear,
             horsePower:carData.car.horsePower,
             vinnumber: carData.car.vinnumber,
-          tax: carData.car.tax,
+            tax: carData.car.tax,
             insuranceCompanies: carData.car.insuranceCompanies,
             maintenanceHistories: carData.car.maintenanceHistories
         };
@@ -84,28 +86,14 @@ const EditCar = () => {
                        autoComplete="off" value={carData.car.vinnumber} readOnly="readonly"
                 />
             </div>
-            <div className="form-group">
-                <select id="brand-register"
-                        name="brand" autoComplete="off" value={carData.car.brand} onChange={handleChange}
-                >{
-                        CarBrands.map((brand)=>(
-                            <option key={brand} value={brand}>{brand}</option>
-                        ))
-                    }
-                </select>
-            </div>
+            <CarBrandList data={carData.car.brand}   handleChange={handleChange}/>
             <div className="form-group">
                 <input id="model-register" type="text" autoComplete="off" name="model"
                        placeholder="Your car model" onChange={handleChange} value={carData.car.model}
                        maxLength="17" minLength="17"
                 />
             </div>
-            <div className="form-group">
-
-                <input id="engineType-register" type="text" autoComplete="off" name="engineType"
-                       placeholder="Your car engine type" onChange={handleChange} value={carData.car.engineType}
-                />
-            </div>
+            <CarEngineType data={carData.car.engineType} handleChange={handleChange} />
             <div className="form-group">
 
                 <input id="bodyType-register" type="text" autoComplete="off" name="bodyType"

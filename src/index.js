@@ -21,11 +21,9 @@ import AuthProvider from "./components/context/AuthProvider"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import Tax from "./components/tax/Tax";
 
-Axios.defaults.baseURL = "http://localhost:8080/api"
+Axios.defaults.baseURL = "https://backend-container-service.81dth4io9qo96.us-east-1.cs.amazonlightsail.com/api"
 
 export const AuthContext = createContext({});
-
-
 function Main() {
 
     const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('username')))

@@ -32,7 +32,7 @@ const InsuranceTypeUpdate = () => {
             costsPerYear: data.costsPerYear,
             coveredCompensation: data.coveredCompensation,
         };
-        common_axios.post("https://backend-container-service.81dth4io9qo96.us-east-1.cs.amazonlightsail.com/api/insurancetype", insCompData)
+        common_axios.post("http://localhost:8080/api/insurancetype", insCompData)
             .then((response) => {
             console.log(response.status);
                 navigate('/insurance_type');

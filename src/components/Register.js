@@ -33,7 +33,7 @@ const Register = () =>{
             email: data.email,
             password: data.password
         };
-        axios.post("https://backend-container-service.81dth4io9qo96.us-east-1.cs.amazonlightsail.com/api/user", userData)
+        axios.post("http://localhost:8080/api/user", userData)
             .then((response) => {
             console.log(response.status);
                 navigate('/successfull/login');

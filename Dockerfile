@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm config set legacy-peer-deps true
-RUN npm ci
+RUN npm install
 
 RUN npm run build
 ENV NODE_ENV production

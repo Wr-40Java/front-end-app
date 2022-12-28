@@ -15,7 +15,7 @@ const [show,setShow]= React.useState(false);
 const [errorMsg, showErrorMsg]= React.useState(false);
 const [headers, setHeaders] = React.useState(['Type','Description', 
 'Costs per year', 'Covered compensation', 'Delete']);
-const link = 'https://backend-container-service.81dth4io9qo96.us-east-1.cs.amazonlightsail.com/api/insurancetype'
+const link = 'http://localhost:8080/api/insurancetype'
 const navigate = useNavigate();
 const context = useContext(AuthContext)
 console.log(context);

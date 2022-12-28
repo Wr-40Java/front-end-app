@@ -44,6 +44,8 @@ function HeaderLoggedOut(props) {
 
         navigate("/")
       } else {
+        localStorage.removeItem("username")
+        localStorage.removeItem("credentials")
         console.log("Incorrect password!")
       }
     } catch (e) {

@@ -40,15 +40,18 @@ function HeaderLoggedOut(props) {
     try {
       const response = await common_axios.get('insurancetype/list')
       console.log(response);
+      localStorage.setItem("username", userData.username)
+      localStorage.setItem("credentials", basicAuthCred)
+
       if (response.status === 200) {
-        localStorage.setItem("username", userData.username)
-        localStorage.setItem("credentials", basicAuthCred)
         setLoggedIn(true)
         setUsername(userData.username)
 
         navigate("/")
       } else {
         console.log("Incorrect password!")
+        localStorage.removeItem("username")
+        localStorage.removeItem("credentials")
       }
     } catch (e) {
       console.log("Username not found!")

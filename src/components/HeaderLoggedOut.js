@@ -10,12 +10,8 @@ function HeaderLoggedOut(props) {
   const {setLoggedIn, setUsername} = useContext(AuthContext)
 
   const [data,setData] = useState({
-    name:"",
-    surname:"",
-    phoneNumber:"",
     username:"",
-    email:"",
-    password:"",
+    password:""
   })
 
   const handleChange = (e) => {
@@ -49,6 +45,8 @@ function HeaderLoggedOut(props) {
 
         navigate("/")
       } else {
+        localStorage.removeItem("username")
+        localStorage.removeItem("credentials")
         console.log("Incorrect password!")
         localStorage.removeItem("username")
         localStorage.removeItem("credentials")

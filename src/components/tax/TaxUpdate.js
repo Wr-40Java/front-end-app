@@ -80,15 +80,15 @@ function TaxUpdate(props) {
             <p><strong>Remember</strong> that when updating the data, system <strong>create a new Tax with the biggest id</strong> and <strong>delete the old Tax</strong>.</p>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name-register" className="text-muted mb-1">
+                    <label htmlFor="costOfTransaction" className="text-muted mb-1">
                         <small>Cost Of Transaction:</small>
                     </label>
-                    <input id="name-register" name="costOfTransaction" className="form-control"
-                           type="text" placeholder="Enter cost here" autoComplete="off"
+                    <input id="costOfTransaction" name="costOfTransaction" className="form-control"
+                           type="number" placeholder="Enter cost here" autoComplete="off"
                            value={data.costOfTransaction} onChange={handleChange}/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="name-register" className="text-muted mb-1">
+                    <label htmlFor="selectTaxType" className="text-muted mb-1">
                         <small>Choose available Tax Type:</small>
                     </label>
                     <Select

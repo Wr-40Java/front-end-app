@@ -9,7 +9,7 @@ function TaxInfo(props) {
         <>
             <div className="col-lg-7 py-3 py-md-5">
                 <p className="lead">Data of selected Tax:</p>
-                <p>Cost of transaction: <strong>{props.showedTax.costOfTransaction}</strong>.</p>
+                <p>Cost of transaction: <strong>{props.showedTax.costOfTransaction}$</strong>.</p>
                 <p>Name of Tax Type: <strong>{props.showedTax.taxType.name}</strong>.</p>
                 <ul>
                     <li>Institution: <strong>{props.showedTax.taxType.institutionToPayFor}</strong>.</li>
